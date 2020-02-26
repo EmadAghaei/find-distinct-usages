@@ -70,7 +70,7 @@ email address}
 \maketitle
 
 \begin{abstract}
-Developers face many challenges when trying to understand large codebases. In particular, they have difficulties in understanding the context of how various internal classes, objects, or methods are used in the codebase. We sought to better understand these challenges by conducting a think-aloud user study with 6 participants. The results of the think-aloud experiment highlighted that developers spend considerable time learning to use internal code artifacts. The result also showed developers use the Find Usages/References feature of IDEs to understand code by example. The results of find usage can be long tail of results that developers find difficulty mentally parsing. We also found that find usage/reference results' would contain duplicate examples in disparate locations in the UI, adding to the difficulty of parsing. Based on the think-aloud study, we hypothesized that removing duplicate examples and grouping similar examples together would reduce the excise in using the find usages/references tool. We designed and implemented a plugin for IntelliJ IDEA that manipulated result of find usages and grouped them based on their similarity. After that, we conducted a controlled experiment with 12 more participants to evaluate our approach. Results showed that this aggregation of Distinct examples is useful.
+Developers face many challenges when trying to understand large codebases. In particular, they have difficulties in understanding the context of how various internal classes, objects, or methods are used in the codebase. We sought to better understand these challenges by conducting a think-aloud user study with 6 participants. The results of the think-aloud experiment highlighted that developers spend considerable time learning to use internal code artifacts. The result also showed developers use the Find Usages/References feature of IDEs to understand code by example. The results of Find Usages can be long tail of results that developers find difficulty mentally parsing. We also found that find usage/reference results' would contain duplicate examples in disparate locations in the UI, adding to the difficulty of parsing. Based on the think-aloud study, we hypothesized that removing duplicate examples and grouping similar examples together would reduce the excise in using the Find Usages/references tool. We designed and implemented a plugin for IntelliJ IDEA that manipulated result of Find Usages and grouped them based on their similarity. After that, we conducted a controlled experiment with 12 more participants to evaluate our approach. Results showed that this aggregation of Distinct examples is useful.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -100,30 +100,30 @@ There is a plethora of research on information foraging and improving learning b
 Find a similar code in a codebase is one code reuse strategy~\cite{rosson1996reuse}. Developers looking for examples of how to use specific methods or objects~\cite{stylos2006mica,umarji2008archetypal}. Opportunistic developers more likely to use example code rather than systematic developers. There exist techniques for supporting reuse, for instance, IDEs has searching feature that enables developers to search for example across the existing codebase, or IDEs has feature for fining right sequence of methods to complete some tasks that developer already started.\par
 
 Developers, when they write or edit code, they might come across code element that they want to change or delete. Before they make changes, they look where the code element is used and how it affects the codebase. \textit{Find Usages} feature in Jetbrains IDEs and \textit{Open Call Hierarchy} feature of Eclipse Provided this ability for developers. Results of Find Usages are listed in window in Jetbrains IDEs that developers are going through the results to find the desired usage or understand the codebase. 
-\todo[inline]{add challenge of Find usages}
+\todo[inline]{add challenge of Find Usages}
 \par
 
 
 
 \section{Challenges and Benefits of Understanding Codebase}
 We conduct a think-aloud study to understand better current practice and the challenges developers face using existing approaches. The study was in-person, and their interaction and thoughts were recorded. Researchers vocally recorded the process while asking the participant to think-aloud while conducting the study. The participants were allowed to ask for hints or questions or clarifications, but we must not give answers.
-We were not looking for successful implementation. We were looking for what developers think about the find usage interface, without coaxing the answers we may want out of them.
+We were not looking for successful implementation. We were looking for what developers think about the Find Usages interface, without coaxing the answers we may want out of them.
 We recruited four participants (P1, P2, P3, P4), two female and two male. The first participant was a graduate computer science student at George Mason University. The remaining three participants were working as a software developer in the industry, two of them had experienced less than one year, but one of them had more than four years of experience in the industry. We designed two tasks for the study. In the beginning, the tasks were piloted with the graduate student participant to make sure the tasks are designed correctly or not. At the and of study, we asked participants to respond to a survey for collecting their experience. In that survey, we asked them 1)What challenges did they experience related to finding a method, variable, or anything. 2)What challenges, if any, did they experience as they tried to begin work l on these tasks? 3)What challenges, if any, did they experience related to understanding and working with the provided codebase? 4) What challenges, if any, did they experience related to their productivity? 
 
 \subsection{Tasks}
 \label{tasks}
 
-The first task was a warm-up for using a find usages tool for code comprehension. The codebase that participants worked on it was Google Guava (772,475 LOC), an open-source set of standard libraries for Java. We chose this library because we thought it is standard and is large enough. We gave the participant a zip file that contained the Guava and asked them to qualitatively describe the range of integer inputs given to the two methods. We gave participants to work on firs task on any IDE that they are more familiar with. Time of the first task was 10 minutes.\par
+The first task was a warm-up for using a Find Usages tool for code comprehension. The codebase that participants worked on it was Google Guava (772,475 LOC), an open-source set of standard libraries for Java. We chose this library because we thought it is standard and is large enough. We gave the participant a zip file that contained the Guava and asked them to qualitatively describe the range of integer inputs given to the two methods. We gave participants to work on firs task on any IDE that they are more familiar with. Time of the first task was 10 minutes.\par
 
 Since we also wanted to understand the behaviors of developers when they are trying to change a codebase, we designed second task for developers. The codebase that we chose for this task was FlyingSaucer, pure Java library for rendering XML, XHTML, and CSS. It was a large codebase 99,000 LOC. We removed statements that create PDF from the codebase, then asked participants to implement functionality to produce “success.pdf.” We added a constraint on the task. Participants should treat code as closed source code, meaning they cannot find Javadocs online or look for online code examples, but they were free to choose any IDE for accomplishing the task. The study was in person, and it lasts 50 minutes for each participant. 
 
 \subsection{Results of Exploratory Study}
 
 
-We collected data from the interaction of developers while they were working on both tasks. During the first task, participants clicked through multiple usages trying to understand how certain common arguments to methods were called. We have participants a maximum of 10 minutes to feel like they had become comfortable with the find usages tool. Participants completed task two in 49, 20, 42 minutes. Two participants had a problem with the size of the codebase.
+We collected data from the interaction of developers while they were working on both tasks. During the first task, participants clicked through multiple usages trying to understand how certain common arguments to methods were called. We have participants a maximum of 10 minutes to feel like they had become comfortable with the Find Usages tool. Participants completed task two in 49, 20, 42 minutes. Two participants had a problem with the size of the codebase.
 \begin{quote}"Overwhelmed by the amount of code." - (P2) \end{quote}
 \begin{quote}"Large codebases are my biggest fear." - (P4) \end{quote}
-3 of 4 did not know about the Find Usage feature, which was interesting. We gave them information and train them what is Find Usage feature and how they can use it. One of them Used the term "implemented" to mean "usage" frequently. In some cases, participants did not have a strong evidence or reason for understanding the codebase. They were trying to use their feeling. 
+3 of 4 did not know about the Find Usages feature, which was interesting. We gave them information and train them what is Find Usagesfeature and how they can use it. One of them Used the term "implemented" to mean "usage" frequently. In some cases, participants did not have a strong evidence or reason for understanding the codebase. They were trying to use their feeling. 
 \begin{quote}"I donot know how .layout() is used but I am going to use it because it's in this code" - (P2) \end{quote}
 \begin{quote}"I feel like this [.layout()] should just work, I hope!" - (P4) \end{quote}
 
@@ -138,12 +138,12 @@ The codebase that we gave participants included unit tests. The interesting thin
 
 \begin{quote} "Tests are a good example of uses." - (P3)\end{quote}
 
-The similarity of Find Usages results was a severe issue for the participants since the codebases were reasonably large. The problem is shown in Fig.~\ref{fig:usege}. The IDE was returning many results, which was challenging for participants to extract useful information for undressing the method or object. When doing find usage, much code looked similar, and it was difficult for the participant to parse for participants. Also, this problem was severe when the method they tied to get Find usage was complex and had complicated call graphs.
+The similarity of Find Usages results was a severe issue for the participants since the codebases were reasonably large. The problem is shown in Fig.~\ref{fig:usege}. The IDE was returning many results, which was challenging for participants to extract useful information for undressing the method or object. When doing find usage, much code looked similar, and it was difficult for the participant to parse for participants. Also, this problem was severe when the method they tied to get Find Usageswas complex and had complicated call graphs.
 
 \begin{figure}
     \centering
-    \includegraphics [width=\columnwidth,keepaspectratio, clip]{figures/Picture1}
-    \caption{It depicts result of Find Usages of IDE. The result window shows there exist 31 usages of the ‘initCapacity’ method. Developers have to go through all of 31 results and also use a pen and paper to find the possible inputs for this method. In this 31 results many of them set same input values of this method, for example 10 is repeated multiple times. This duplicate result is annoying and time consuming for Developers. 
+    \includegraphics [width=\columnwidth,keepaspectratio, clip]{figures/challenge}
+    \caption{It depicts result of regualr Find Usages of IntelliJ IDE. The result window shows there exist 31 usages of the "initCapacity" method. Developers have to go through all of 31 results and also use a pen and paper to find the possible inputs for this method. In this 31 results many of them set same input values of this method, for example 10 is repeated multiple times. This duplicate result is annoying and time consuming for Developers. 
 }
 \label{fig:usege}
 \end{figure}
@@ -151,66 +151,38 @@ The similarity of Find Usages results was a severe issue for the participants si
 \begin{quote}"There were a ton of methods and usages that were really similar and it was a lot to put together"- (P4)\end{quote}
 \begin{quote}"I had difficulty finding usages with low complexity of calls and uses"- (P4)\end{quote}
 
-Another typical behavior was that participants were Scrolling quickly through usages because the surrounding code was not making calls she wanted to make. Participants occasionally navigated to unhelpful usages that took time. A surprising behavior as participants focused on the first result of Find Usage, they copied the first usage, then paste it into the place they want to implement and tried to change it in the way they want. The confusing thing about Find Usage is happen when a method is overloaded. Participants had difficulty migrating to the correct find usage because of overloaded methods.
+Another typical behavior was that participants were Scrolling quickly through usages because the surrounding code was not making calls she wanted to make. Participants occasionally navigated to unhelpful usages that took time. A surprising behavior as participants focused on the first result of Find Usage, they copied the first usage, then paste it into the place they want to implement and tried to change it in the way they want. The confusing thing about Find Usages is happen when a method is overloaded. Participants had difficulty migrating to the correct Find Usages because of overloaded methods.
 
 
 \section{Find Distinct Usages}
-Result of the think-aloud study revealed there exist challenges in using Find Usages feature, participants overwhelmed with tons of usage, and they spent much time in going throw many of them for understating the codebase. We brainstormed on the results and came up with the idea that the refining result of Find Usage might help developers and increase their productivity. In order to design a better tool for addressing the issues, we must understand what is going on in the developers' world and understand how our tool can make the developers' productivity higher. Therefore, we summarized research findings into storyboards. After that, we designed a plugin for IntelliJ IDEA that refines the result of the Find Usages feature. It aggregates the results and shows the only relevant results. Relevant results likely depend on a measure of sameness.\par
-The basic idea behind Find Distinct Usages is to group results from a standard Find Usages/References IDE operation based on each result's surrounding code. Our approach is to group usages found by the IntelliJ IDEA usage finder and group them based on similar ASTs while presenting the result to the user. Our comparison leveraged the Gumtree Spoon AST Diff framework, where we measured the resulting differing and matching nodes from an object representing the diff. \par
-
-\todo[inline]{In this section need a figure. Design a figure based on our brainstorming that we had in our meeting with Thomas.}
+Result of the think-aloud study revealed there exist challenges in using Find Usages feature, participants overwhelmed with tons of usage, and they spent much time in going throw many of them for understating the codebase. We brainstormed on the results and came up with the idea that the refining result of Find Usagesmight help developers and increase their productivity. In order to design a better tool for addressing the issues, we must understand what is going on in the developers' world and understand how our tool can make the developers' productivity higher. Therefore, we summarized research findings into storyboards. After that, we designed a plugin for IntelliJ IDEA that refines the result of the Find Usages feature. It aggregates the results and shows the only relevant results. Relevant results likely depend on a measure of sameness.\par
+The basic idea behind Find Distinct Usages is to group results from a standard Find Usages/References IDE operation based on each result's surrounding code. Our approach is to group usages found by the IntelliJ IDEA usage finder and group them based on similar ASTs while presenting the result to the user. Our comparison leveraged the Gumtree Spoon AST Diff framework, where we measured the resulting differing and matching nodes from an object representing the diff. A general overview of our approch is shown in Fig.~\ref{fig:general} 
 
 \begin{figure*}
     \centering
-    \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/generalView}
-    \caption{It }
+    \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/generlView.pdf}
+    \caption{This figure depicts how the Find Distinct Usages works. I collect usages and create an AST for each usage. Then based on similarity and threshold it decides to assign it to a group. }
 \label{fig:general}
 \end{figure*}
+
+
 \subsection{User Interface} 
 
 Because the adoption of new methodology and new tool can be onerous to programmers~\cite{adaption2002}. We extended the existing Find Usages interface of IntelliJ IDEA by adding additional usage groups that contained usages with similar code. Since each user group contained usages that were surrounded by similar code, we hypothesized the usages would be in similar contexts, implying more information about the usage. So a user could inspect one usage within a usage group and gleam that the other usages within that group were similar and move on to another usage group depending on their task. The task we associate this tool with is finding and parsing a large variety of usages while seeking examples of an internal API.
-\todo[inline]{Below section needs two screenshots to compare, one of the classic find usages and another of our extension.}
 
 \subsection{Usage Grouping Back-end} 
 Usages were grouped based on similar code within the usage's containing method code block. Logic of the back-end is depicted in Fig.~\ref{fig:flowchart}. For every usage, IntelliJ IDEA calls our aggregate usage method, which returns a reference to a particular Usage Group. An internal IntelliJ IDEA object representing groups of usages. We compare the given usage with all other usages in all existing Usage Groups. We consider the given usage to be a part of a usage group when it has a guaranteed minimum threshold of similarity with every abstract syntax tree (AST)  associated with that Usage Group. If all the Usage Groups have minimum similarities that do not meet the threshold, then we create a new Usage Group with the supplied usage and then return that Usage Group. \par
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics [width=\columnwidth,keepaspectratio, clip]{figures/flowchart}
     \caption{Flowchart shows how the back-end of Find Distinct Usages work. }
 \label{fig:flowchart}
 \end{figure}
 
-\subsection{Similarity Detection using Abstract Syntax Trees}
-The basic problem in similarity of usages was finding a degree of similarity between two usages. The easiest approach is string distance algorithms such as Hamming distance and Levenshtein distance. Each element in the code can be placed in an AST. For exmaple a \textit{Foreach} is an statement which is child of method, the method is child of class. Another simplification is decreasing the usage to the lowest level which is leaf of AST. In our first iteration of creating the plugin we used string distance, and considered only the leaf node of the AST that contains the usage. After several piloting we found this naive approach is not fine. Therefore, we made two major changes in the first approach. The first change was that we increased the scope of usage to the entire body of the method that usage placed, in fact we tried to find similarity among sub-trees instead of leaf nodes of ASTs. Therefore, we increased the scope and consider the entire body of the mehtod that usage places in as a sub-tree. Rather than comparing sub-trees for exact match, we compated sub-trees similarity based on multiple parameters~\cite{baxter1998clone}.The similarity used a threashold that specify how similiar to sub-trees should be. The formula that compute similarity is:
-\begin{equation}
-Similarity = 2 \times S  \div (2  \times S  + subAST1 + subAST2)
-\label{equation1}
-\end{equation}
+The back-end has three main parts. The first part is an algorithm(see Algorithm1) tries to find minimum similarity between the usage that we want to grouping and all other members of a group. It uses the AST diff formula (\ref{equation1}) for calculating the similarity.\par
 
-where $S$ is number of shared nodes between two sub-trees, $subAST1$ is number of different node in sub-AST 1, and $subAST2$ is number of different node in sub-AST 2. \par
-Another modification was in the algorithm. We used GumTree~\cite{baxter1998clone,DBLP:conf/kbse/FalleriMBMM14,falleri2014fine}, which leverage the GumTreeDiff algorithm. We chose this algorithm because GumTreeDiff is focused on fine-grained differentiation that is more sensitive to a programmer~\cite{falleri2014fine}. The Gumtree Spoon AST Diff leverages this algorithm while providing more detailed parsing of Java source code. The authors of GumTreeDiff focus on its use in SCM, where we leverage it for grouping potential example code. \par
-
-
-
-% \begin{algorithm}
-%     \caption{Similarity of two Usages - similarity($x$, $y$)} 
-%     \begin{algorithmic}[1]
-%     \State $xAST$  $\leftarrow$ astOfContainingFunction($x$)
-%     \State $yAST$ $\leftarrow$ astOfContainingFunction($y$)
-%     \State // Get matching AST Nodes in common using gumtree-spoon-ast-diff
-%     \State $mappings$ $\leftarrow$ getMappingSet($xAST$, $yAST$)
-%     \State 
-%     \textbackslash \textbackslash  Use formula from     
-%     \State 
-%     \textbackslash \textbackslash http://leodemoura.github.io/files/ICSM98.pdf
-%     \State $similarity$ $\leftarrow$
-%     $$\frac
-%     {2*size(mappings)}
-%     {2*size(mappings) + size(xAST) + size(yAST)}$$
-%     \State return $similarity$
-%     \end{algorithmic} 
-% \end{algorithm}
 \begin{algorithm}
+\label{algo1}
     \caption{Minimum Similarity in a Usage Group - minSimilarity($x$, $G_{i}$)} 
     \begin{algorithmic}[1]
     \State Given a Usage $x$ and a Usage Group $G_{i}$
@@ -225,8 +197,10 @@ Another modification was in the algorithm. We used GumTree~\cite{baxter1998clone
     \end{algorithmic} 
 \end{algorithm}
 
+The second main part is algorithm that tries to find the most similar group for the usage that we want to categorize it, Algorithm 2. This algorithm iterate over all groups and call Algorithm~\ref{algo1} to find the most similar group. At this point we know which group is the most similar to the usage that we want to categorize. But we need to consider similarity Threshold. For example we might choose \textgreater 90\% means very similar, \textgreater 70\% means similar, \textless 40\% means not so similar. Finding an appropriate threshold is critical. A small threshold involve many dissimilar usages and a large threshold might lead to a few results~\cite{deng2013top}. We chose a constant for the similarity threshold of approximately 88\%. There is no real justification for this example besides it working well with an example. In next step our algorithm compare the minimum similarity that it calculated with the threshold and based on decide to create a new group or add the usage to the most similar group. 
 
 \begin{algorithm}
+\label{algo2}
     \caption{Find Corresponding Usage Group} 
     \begin{algorithmic}[1]
     \State // Given a Usage $x$ \& a set of Usage Groups $G$
@@ -249,76 +223,119 @@ Another modification was in the algorithm. We used GumTree~\cite{baxter1998clone
 \end{algorithm}
 
 
+The last and most important part of our plugin is AST diffing approach. The basic problem in similarity of usages was finding a degree of similarity between two usages. The easiest approach is string distance algorithms such as Hamming distance and Levenshtein distance. Each element in the code can be placed in an AST. For exmaple a \textit{Foreach} is an statement which is child of method, the method is child of class. Another simplification is decreasing the usage to the lowest level which is leaf of AST. In our first iteration of creating the plugin we used string distance, and considered only the leaf node of the AST that contains the usage. After several piloting we found this naive approach is not fine. Therefore, we made two major changes in the first approach. The first change was that we increased the scope of usage to the entire body of the method that usage placed, in fact we tried to find similarity among sub-trees instead of leaf nodes of ASTs. Therefore, we increased the scope and consider the entire body of the method that usage places in as a sub-tree. Rather than comparing sub-trees for exact match, we compated sub-trees similarity based on multiple parameters~\cite{baxter1998clone}.The similarity used a threshold that specify how similar to sub-trees should be. The formula that compute similarity is:
+\begin{equation}
+Similarity = 2 \times S  \div (2  \times S  + subAST1 + subAST2)
+\label{equation1}
+\end{equation}
+
+where $S$ is number of shared nodes between two sub-trees, $subAST1$ is number of different node in sub-AST 1, and $subAST2$ is number of different node in sub-AST 2. \par
+Another modification was changind string distance algorithms to a more poweful algorithm. We used GumTree~\cite{baxter1998clone,DBLP:conf/kbse/FalleriMBMM14,falleri2014fine}, which leverage the GumTreeDiff algorithm. We chose this algorithm because GumTreeDiff is focused on fine-grained differentiation that is more sensitive to a programmer~\cite{falleri2014fine}. The Gumtree Spoon AST Diff leverages this algorithm while providing more detailed parsing of Java source code. The authors of GumTreeDiff focus on its use in SCM, where we leverage it for grouping potential example code. \par
 
 
-% *******************************************Evaluation section**************************************************************************************************
+
+% \begin{algorithm}
+%     \caption{Similarity of two Usages - similarity($x$, $y$)} 
+%     \begin{algorithmic}[1]
+%     \State $xAST$  $\leftarrow$ astOfContainingFunction($x$)
+%     \State $yAST$ $\leftarrow$ astOfContainingFunction($y$)
+%     \State // Get matching AST Nodes in common using gumtree-spoon-ast-diff
+%     \State $mappings$ $\leftarrow$ getMappingSet($xAST$, $yAST$)
+%     \State 
+%     \textbackslash \textbackslash  Use formula from     
+%     \State 
+%     \textbackslash \textbackslash http://leodemoura.github.io/files/ICSM98.pdf
+%     \State $similarity$ $\leftarrow$
+%     $$\frac
+%     {2*size(mappings)}
+%     {2*size(mappings) + size(xAST) + size(yAST)}$$
+%     \State return $similarity$
+%     \end{algorithmic} 
+% \end{algorithm}
+
+
+
+
+
+
+
+
+% *************************Evaluation section********************************************************************
 \section{Evaluation}
 To evaluated the plugin that we built in terms of productivity, we conducted an experimental user study in which participants tried to add a feature on a codebase. We recruited 12 participants to implement a method and then analyzed their environment interactions and the resulting code they created. 
 
 \subsection{Method}
 
-We recruited 12 more unpaid participants by advertising on our groups of social networks (referred to as P5, P6, P7,..., P16, P17). 33\% of participants were female, and 66\% were male. Five participants were graduate students, four software developers, and 3 of them were undergraduate students. We randomly distribute them into two groups; one group worked with our plugin. Another group worked as a control group with regular find usage features of IntelliJ IDEA. The task was the same as the task that we used in an exploratory study, described in section \ref{tasks}. Participants of the control group had 60 months of experience with Java language. The experimental group had 62 months.\par 
+We recruited 12 more unpaid participants by advertising on our groups of social networks. We use a label for referencing participants. P5, P6,...,P9,P10 worked in control condition. P11, P12,..., P16, P16 worked in experimental group. 33\% of participants were female, and 66\% were male. Five participants were graduate students, four software developers, and 3 of them were undergraduate students. We randomly distribute them into two groups; one group worked with our plugin. Another group worked as a control group with regular Find Usages features of IntelliJ IDEA. The task was the same as the task that we used in an exploratory study, described in section \ref{tasks}. Participants of the control group had 60 months of experience with Java language. The experimental group had 62 months.\par 
 At the end of the study, we had an interview with the participants and asked them questions about their experience.
 
+\begin{figure*}[h]
+    \centering
+    \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/compare}
+    \caption{In the blue rectangle number 1 screenshot the interface of Find Distinct Usages an the in the number 2 the regular Find Usages are depicted. }
+\label{fig:compare}
+\end{figure*}
 
 \subsection{Results}
-To investigate the productivity of Find Distinct Usages, we measure the completion time of the task. Participants in the experimental group completed that task in a median of 21.5 minutes and 33 minutes in the control group. 
+To investigate the productivity of Find Distinct Usages, we measure the completion time of the task. Participants in the experimental group completed that task in a median of 21.5 minutes and 33 minutes in the control group. \par
 
-We observed the behaviors of developers and labeled them to find a pattern from their activities while they were working on the task. We categorized them in the bellow. These behaviors are common between both control and experimental group. 
-\begin{enumerate}
+A qualitative data might be useful is behaviors of developers. We observed the behaviors of developers and labeled them to find a pattern from their activities while they were working on the task. The bellow behaviors are common between both control and experimental group. The reason that they had many common behaviors was the user interface for our tool and regular Find Usages tool was similar. \par
 
-\item After they selected a usage, they clicked on that usages and opened the class that contained that usage. In that class, they use another Find Usage on other methods. Sometimes they called Find Usages several times, and they forgot the call graph and got lost. So they left the usage and came back to the list of results. After that, they chose another use. 
-\item IntelliJ IDEA has inline Find Usages by pressing control on the keyboard and clicking by mouse on the method that shows a list of usages. In this approach, developers do not go to a separate result window. The result of this approach has a better abstraction. One developer from control group that used this approach she completed the task in 17 minutes. Seventeen minutes was the second minimum of time among the completion time of all participants. Another developer that used this approach was from the experimental group. He completed the task in 13 minutes, which was the lowest among 12 participants. 
-\item Results of Find Usages that have a variable, not primitive types, are forcing developers to open the class and read the class to understand the usage. Clicking on the usage an going to another window was required in some cases.
-\item they do not skim all results of Find Usages in the beginning. They read result of usages sequentially. They start from the first result in the list then go through the other. 
-\end{enumerate}\par
+Several sequential using of Find Usages feature is misleading. After participants selected a usage, they clicked on that usages and opened the class that contained that usage. In that class, they use another Find Usages on other methods. Sometimes they called Find Usages several times, and they forgot the call graph and got lost. So they left the usage and came back to the list of results. After that, they chose another use. \par
+
+Inline Find Usages might be more useful than seeing results in a separate result window. IntelliJ IDEA has inline Find Usages by pressing control on the keyboard and clicking by mouse on the method that shows a list of usages. In this approach, developers do not go to a separate result window. The result of this approach has a better abstraction. One developer from control group that used this approach she completed the task in 17 minutes. Seventeen minutes was the second minimum of time among the completion time of all participants. Another developer that used this approach was from the experimental group. He completed the task in 13 minutes, which was the lowest among 12 participants. \par
+
+Usages that they accept primitive type like integer are easier to understand than usages they have variable in their input arguments. Results of Find Usages that have a variable, not primitive types, were forcing developers to open the class and read the class to understand the usage. Clicking on the usage an going to another window was required in some cases.\par
+
+Participants did not skim all results of Find Usages in the beginning. They read result of usages sequentially. They start from the first result in the list then go through the other. Find Usages window of IntelliJ IDEA expand and open the first usage, it might be a reason.\par
+
+There was a pattern for productive participants, 1) They utilized Find Usages with Find In Path features for understanding the codebase.  2) Before start reading usages, they expand usages and skimmed the list of usages. After that decided to go through the best usage that might help them. \par
+
+At the end of the study, we interviewed all participants and asked them to tell us about their experience. One participant told us that several sequential using of Find Usages feature is misleading.
+\begin{quote} "I was getting lost when I was using nested [several sequential] Find Usages for understand codebase." - (P10)\end{quote}
+
+ An interesting usability issue that P10 and P13 had with regular Find Usages was the number in the result that shows the line of the statement. They told us they thought this number is the frequency of repeating that statement.\par
+ 
+We received feedback about the grouping of usages in our approach. Find Distinct Usages approach used a similar name for all groups in the list of result.It was confusing for 2 of participants (P12 and P14). They suggested us to change the naming convention. Since the name of all groups was similar (see Figure.~\ref{fig:compare}) they were curious how we grouped the usages.\par
+
+Also we asked them give us any suggestion that might be useful. They gave us couple of suggestion. The interesting one was P10 told us if they have Call Graphs in combination with Find Usages might be useful. 
 
 
-There was a pattern for productive participants. They combined Find Usages with Find In Path feature for understanding the codebase. Before start reading usages, they expand usages and skimmed the list of usages. After that decided to go through the best usage that might help them. On the other hand, participants how did not read or at least skimmed the list of usages were less productive. \par
 
-At the end of the study, we interviewed all participants and asked them to tell us about their experience. One participant told us that several sequential using of Find Usages feature is misleading. He told us he is getting lost when he is using several find usages for understand a codebase. An interesting usability issue that 3 of the participants had with regular Find Usages was the number in the result that shows the line of the statement. They thought this number is the frequency of repeating that statement. We received feedback about the grouping of usages. Find Distinct Usages approach used a similar name for all groups in the list. It was confusing for 2 of them. They suggested us to change the naming convention. Another participant told us if they have call graphs to Find Usages might be useful. One participant was curious to know how we grouped usages, what was our variables for grouping. 
-
-
+% *************************Limitation********************************************************************
 \section{Limitation And Threats To Validity}
 Our study had several limitations and potential threats to the internal and external validity of the results. \par  
 
 In selecting a task, we sought to identify a task that is representative of a typical large codebase that contains many usages for methods. Smaller or Larger codebase may involve more complex usages where individual behaviors are more challenging to identify. \par 
 
-Find Distinct Usages approach is dependent on IDE and language. It is not clear if we use it on other IDEs or other languages, the result might be different.\par 
+Second threat is Find Distinct Usages approach is dependent on IDE and language. It is not clear if we use it on other IDEs or other languages, the result might be different.\par 
 
-
+% *************************Discussion********************************************************************
 \section{Discussion}
+Our exploratory study showed there exist challenges in Find Usages feature of IntelliJ IDEA. We designed an approach and implement a plugin on top of Find Usages feature of IntelliJ IDEA to fix the issues. Our approach utilize AST diffs of usages for grouping similar usages in one group. The result of controlled experiment showed our approach could decrease 35\% of time completion of implementation a simple logic in a large codebase.
 
 The approach that we used for grouping the usage was a naive approach to clustering that we took due to time constraints preventing us from better understanding the IntelliJ SDK. In the future, we hope to re-implement the usage grouping with merging as part of an agglomerate clustering approach. Also, We can work on scalability and response time of the plugin \par
 
 A couple of participants complaint about the naming convention of groups. Names were similar. In future, we must change it to more readable names.\par
 
-Another issue that we observed was. If Find Usage feature expands all usage by default that might be more useful for developers.\par
+IntelliJ IDEA by default open and extend the first usages in the list of result. Another issue that we observed was If Find Usages feature expands all usage by default that might be more useful for developers.\par
 
 IntelliJ IDEA had inline Find Usages feature, which looks great. We did not think about it. Nevertheless, we guess developers who use the inline Find Usages might be more productive. In the future, we might compare them. \par
 
+In future work this should either be picked based on trying out different thresholds on different projects or probably better allowing it to be configured by a menu option as part of the IDE plugin. Choosing the similarity threshold here for describing similar code, is also familiar to choosing a K when doing K-means, which depends highly on the data-set that K-means is applied to. Picking a good default threshold would be future work, but for now the best approach would probably be to set it as an option via a menu.
 
+% *************************Conclusion********************************************************************
 \section{Conclusion}
-...
+Developers have difficulties in understanding the context of how various internal classes, objects, or methods are used in the codebase. We sought to better understand these challenges by conducting a think-aloud user study with 6 participants. The results of the think-aloud experiment highlighted that developers spend considerable time learning to use internal code artifacts. The result also showed developers use the Find Usages/References feature of IDEs to understand code by example. The results of Find Usages can be long tail of results that developers find difficulty mentally parsing. We also found that find usage/reference results' would contain duplicate examples in disparate locations in the UI, adding to the difficulty of parsing. Based on the think-aloud study. We designed and implemented a plugin for IntelliJ IDEA that manipulated result of Find Usages and grouped them based on their similarity. After that, we conducted a controlled experiment with 12 more participants to evaluate our approach. Results showed that this aggregation of distinct examples save 35\% times of developers..
 
 
-\section*{Acknowledgment}
-
-acknowledgments in the unnumbered footnote on the first page.
+% \section*{Acknowledgment}
+% % [TODO]: mention Dr. Jon Bell. He helped us in first ideation part of the paper.
+% acknowledgments in the unnumbered footnote on the first page.
 
 \bibliographystyle{IEEEtran}
 \bibliography{FUU}
 
-% \begin{thebibliography}{00}
-% \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-% \bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-% \bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-% \bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-% \bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-% \bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-% \bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
-% \end{thebibliography}
-% \vspace{12pt}
 
 
 \end{document}
