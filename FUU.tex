@@ -160,7 +160,12 @@ The basic idea behind Find Distinct Usages is to group results from a standard F
 
 \todo[inline]{In this section need a figure. Design a figure based on our brainstorming that we had in our meeting with Thomas.}
 
-
+\begin{figure*}
+    \centering
+    \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/generalView}
+    \caption{It }
+\label{fig:general}
+\end{figure*}
 \subsection{User Interface} 
 
 Because the adoption of new methodology and new tool can be onerous to programmers~\cite{adaption2002}. We extended the existing Find Usages interface of IntelliJ IDEA by adding additional usage groups that contained usages with similar code. Since each user group contained usages that were surrounded by similar code, we hypothesized the usages would be in similar contexts, implying more information about the usage. So a user could inspect one usage within a usage group and gleam that the other usages within that group were similar and move on to another usage group depending on their task. The task we associate this tool with is finding and parsing a large variety of usages while seeking examples of an internal API.
@@ -205,43 +210,43 @@ Another modification was in the algorithm. We used GumTree~\cite{baxter1998clone
 %     \State return $similarity$
 %     \end{algorithmic} 
 % \end{algorithm}
-% \begin{algorithm}
-%     \caption{Minimum Similarity in a Usage Group - minSimilarity($x$, $G_{i}$)} 
-%     \begin{algorithmic}[1]
-%     \State Given a Usage $x$ and a Usage Group $G_{i}$
-%     \If{$G_{i}$ = null}
-%     \State return  $-\infty$
-%     \EndIf
-%     \State $minSimilarity$ $\leftarrow$ $\infty$
-%     \For{each usage $u_{i}$ in $G_{i}$}
-%     \State $minSimilarity$ $\leftarrow$ min($minSimilarity$, similarity($x$, $u_{i}$))
-%     \EndFor
-%     \State return $minSimilarity$
-%     \end{algorithmic} 
-% \end{algorithm}
+\begin{algorithm}
+    \caption{Minimum Similarity in a Usage Group - minSimilarity($x$, $G_{i}$)} 
+    \begin{algorithmic}[1]
+    \State Given a Usage $x$ and a Usage Group $G_{i}$
+    \If{$G_{i}$ = null}
+    \State return  $-\infty$
+    \EndIf
+    \State $minSimilarity$ $\leftarrow$ $\infty$
+    \For{each usage $u_{i}$ in $G_{i}$}
+    \State $minSimilarity$ $\leftarrow$ min($minSimilarity$, similarity($x$,$u_{i}$))
+    \EndFor
+    \State return $minSimilarity$
+    \end{algorithmic} 
+\end{algorithm}
 
 
-% \begin{algorithm}
-%     \caption{Find Corresponding Usage Group} 
-%     \begin{algorithmic}[1]
-%     \State // Given a Usage $x$ \& a set of Usage Groups $G$
-%     \State $mostSimilarGroup$ $\leftarrow$ $null$
-%     \For{each Usage Group $G_{i}$ in $G$}
-%     \If{minSimilarity($x$, $mostSimilarGroup$) $<$ minSimilarity($x$, $G_{i}$)}
-%     \State $mostSimilarGroup$ $\leftarrow$ $G_{i}$
-%     \EndIf
-%     \EndFor
-%     \State // Given some similarity threshold $T$
-%     \If{minSimilarity($x$, $mostSimilarGroup$) $<$ $T$}
-%         \State // Create new usage group and modify $G$.
-%         \State $G_{new}$ $\leftarrow$ newUsageGroupWithInitialMember($x$)
-%         \State $G$ $\leftarrow$ $G$ $\cup$ \{$G_{new}$\}
-%         \State return $G_{new}$
-%     \EndIf
-%     \State addToGroup($mostSimilarGroup$, $x$)
-%     \State return $mostSimilarGroup$
-%     \end{algorithmic} 
-% \end{algorithm}
+\begin{algorithm}
+    \caption{Find Corresponding Usage Group} 
+    \begin{algorithmic}[1]
+    \State // Given a Usage $x$ \& a set of Usage Groups $G$
+    \State $mostSimilarGroup$ $\leftarrow$ $null$
+    \For{each Usage Group $G_{i}$ in $G$}
+    \If{minSimilarity($x$, $mostSimilarGroup$) $<$ minSimilarity($x$, $G_{i}$)}
+    \State $mostSimilarGroup$ $\leftarrow$ $G_{i}$
+    \EndIf
+    \EndFor
+    \State // Given some similarity threshold $T$
+    \If{minSimilarity($x$, $mostSimilarGroup$) $<$ $T$}
+        \State // Create new usage group and modify $G$.
+        \State $G_{new}$ $\leftarrow$ newUsageGroupWithInitialMember($x$)
+        \State $G$ $\leftarrow$ $G$ $\cup$ \{$G_{new}$\}
+        \State return $G_{new}$
+    \EndIf
+    \State addToGroup($mostSimilarGroup$, $x$)
+    \State return $mostSimilarGroup$
+    \end{algorithmic} 
+\end{algorithm}
 
 
 
