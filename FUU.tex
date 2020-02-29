@@ -26,7 +26,7 @@
 \begin{document}
 \linenumbers
 
-\title{Unique Groups on Find Usages}
+\title{Clustering Find Usages Results}
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
 \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
@@ -78,7 +78,7 @@ email address}
 \maketitle
 
 \begin{abstract}
-Developers face many challenges when trying to understand large codebases. In particular, they have difficulties in understanding the context of how various internal classes, objects, or methods are used in the codebase. We sought to better understand these challenges by conducting a think-aloud user study with 6 participants. The results of the think-aloud experiment highlighted that developers spend considerable time learning to use internal code artifacts. The result also showed developers use the Find Usages/References tool of IDEs to understand code by example. The results of Find Usages can be long tail of results that developers find difficulty mentally parsing. We also found that find usage/reference results' would contain duplicate examples in disparate locations in the user interfaces, adding to the difficulty of parsing. Based on the think-aloud study, we hypothesized that removing duplicate examples and grouping similar examples together would reduce the excise in using the Find Usages/references tool. We designed and implemented a plugin for IntelliJ IDEA that manipulated result of Find Usages and grouped them based on their similarity. After that, we conducted a controlled experiment with 12 more participants to evaluate our approach. Results showed that this aggregation of unique examples is useful.
+Developers face many challenges when trying to understand large codebases. In particular, they have difficulties in understanding the context of how various internal classes, objects, or methods are used in the codebase. We sought to better understand these challenges by conducting a think-aloud user study with 6 participants. The results of the think-aloud experiment highlighted that developers spend considerable time learning to use internal code artifacts. The result also showed developers use the Find Usages/References tool of IDEs to understand code by example. The results of Find Usages can be long tail of results that developers find difficulty mentally parsing. We also found that find usage/reference results' would contain duplicate examples in disparate locations in the user interfaces, adding to the difficulty of parsing. Based on the think-aloud study, we hypothesized that removing duplicate examples and clustering similar examples together would reduce the excise in using the Find Usages/references tool. We designed and implemented a plugin for IntelliJ IDEA that manipulated result of Find Usages and clustered them based on their similarity. After that, we conducted a controlled experiment with 12 more participants to evaluate our approach. Results showed that this aggregation of unique examples is useful.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -89,9 +89,12 @@ Code navigation, information foraging, Find Usages, Find References, large Codeb
 % ***********************************************Introduction***************************************
 \section{Introduction}
 
-Developers face many challenges in understanding codebases. Developers are looking for information to understand the codebase. One source for understanding codebase is documentation, but documents are frequently out of date and often poorly written~\cite{documentation}. Another source is reading the codebase. Developers reported understanding existence codebase is one of the most time-consuming activities of software development and reported understanding rationale behind code is serious challenge~\cite{latoza2006maintaining}. Developers spend a significant amount of time navigating and searching existing code for completing their daily tasks~\cite{piorkowski2016foraging,ko2006exploratory}. Developers frequently search for code examples~\cite{brandt2009two,sadowski2015developers}.
+Developers face many challenges in finding answer to their questions while they are working on their tasks. They rely on different sources to find answers to their problems. One source for searching is documentation, but documents are frequently out of date and often poorly written~\cite{documentation}. Documents are not answering low-level information such as hidden contracts, implementation details, or side effects. Another source is reading understanding the codebase. Code is the main source of knowledge about the software product, however finding answer in this source has difficulties. Developers reported understanding existence codebase is one of the most time-consuming activities of software development and reported understanding rationale behind code is serious challenge~\cite{latoza2006maintaining}. Hence, developers prefer to find the answers in implementation code that could be more accurate and more quick to read~\cite{head2018not}.\par
 
-Developers prefer to find answer of their questions code rather than documents. Documents are not answering low-level information such as hidden contracts, implementation details, or side effects. Therefore, developers prefer to find the answers in implementation code that could be more accurate and more quick to read~\cite{head2018not}. Developers for finding answers of their questions in the code need tools to navigate and search.\par
+
+
+Developers frequently search for code examples~\cite{brandt2009two,sadowski2015developers}. Developers spend a significant amount of time navigating and searching existing code for completing their daily tasks~\cite{piorkowski2016foraging,ko2006exploratory}. After they found the example, they are trying to understand it. Developers trying to find usage of that example in different location of the codebase. As a next step, developers often, after finding and understanding the code example, copy and paste the code then change it. A filed study showed developers on average in one hour make four copy and paste code (code clone)~\cite{kim2004ethnographic}. Before they make changes in the cloned code, developers look where the code element is used and how it affects the codebase. In this step developer for addressing their concerns, they again need tools to search and navigate in the codebase.\par
+
 
 Tons of tool exists to help developers to be more productive when they are navigating or searching in codebase~\cite{augustine2015field,ko2006exploratory,albusays2017interviews}. The two most common tools that developers are using in their daily activities are \textit{Find Usages} in Jetbrains IDEs and \textit{Open Call Hierarchy} of Eclipse that Provided this ability for developers. One utilizing example of this tool is that when developers write or edit code, they might come across code elements that they want to change or delete. Before they make changes, they look where the code element is used and how it affects the codebase. Although these tools are the most popular, they have many unaddressed challenges. Results of \textit{Find Usages} are listed in a window in Jetbrains IDEs that developers are going through the results to find the desired usage or understand the codebase. In large codebases, similar usages are frequently happen. Because of that in this kind of codebases, they are facing a high number of duplicate usages.\par
 
@@ -103,7 +106,7 @@ Tons of tool exists to help developers to be more productive when they are navig
 
 
 To investigate the challenges developers face in using Find Usages, we first conducted an exploratory study. We found that participants sometimes became overwhelmed with the number of results. Instead of investigating more usages, participants instead focused on a single usage as as an example for some time before moving on to investigate other potentially better examples.
-Based on these findings, we hypothesized that grouping call sites by similarity may help developers to more rapidly understand how to use a function. \par
+Based on these findings, we hypothesized that clustering call sites by similarity may help developers to more rapidly understand how to use a function. \par
 
 To explore this idea, we designed and developed Find Unique Usages, which clusters usages by similarity and displays clusters to the developer. 
 To evaluate Find Unique Usages, we conducted  an  experiment where 12 developers implemented a small feature in an open-source codebase. We found that developers with Find Unique Usages were significantly faster, completing their task in 35\% less time.\par
@@ -113,22 +116,24 @@ In the rest of this paper, we first review related work. We then describe our ex
 
 % ***********************************************Related Work***************************************
 \section{Relate Work}
-Our work builds on prior studies of code navigation, tools for helping developers navigate and find code examples, and approaches for identifying similar code. 
+Our work builds on prior studies of how developers are working to understand a code, what/how tools are helping developers to understand the code, and how to optimize these tools to be more useful. 
 
-Developers are using code navigation in their daily activities. For instance, they want to understand what a method does or when it is called or want to understand how to reuse a function by finding examples of code snippets. In fact, they investigate source code. Navigating in source code is described in information foraging theory~\cite{pirolli1999informationforaging}. In software engineering, this theory usually modeled as call graphs. Methods are nodes, and function invocations are edges. Developers have challenges in traversing the call graph in code navigation~\cite{albusays2017interviews}. Navigating and re-finding place of the code that had already been visited is frequent, difficult and distracting~\cite{ko2005eliciting,deline2005towards}.\par 
 
-Tools are trying to help developer to be more productive in the code navigation. These tools are grouped into three categories. The first category is structural relationship traversal. These tools find starting point then traverse relationships to find other related code locations~\cite{karrer2011stacksplorer,augustine2015field,latoza2011visualizing}. Another category is recommender tools. Based on history developers did on similar tasks, they predict relevant elements~\cite{zimmermann2005mining,deline2005easing}. Task context navigation is the last category of code navigation tools. They make it easier to navigate back and forth between task context elements~\cite{ko2006exploratory}. Although there exist several tools for code navigation, code navigation is still challenging for developers~\cite{albusays2017interviews}. 
+Developers in daily tasks collect information from peers, code, documentation, and more~\cite{latoza2006maintaining}. Information theory ~\cite{pirolli1999informationforaging} has been used to describe how software developers search for finding information~\cite{fleming2013information}. Based on this theory developers always for answering their questions are trying maximize the value of information, minimize the cost navigation. Developers choose where to look, they estimate the expected value of information they find in that location and cost of finding the it. Half of navigation choices lead to less value than what developers expected~\cite{piorkowski2016foraging}. From perspective of foraging, our study want to explore how developers are looking for information while they are using Find Usages tool.\par
 
-A common way to edit code is by copying existing code, called code clones~\cite{codeCloneDetection2019}. Sometimes code clone is bad, but there exist many situations that code clone is fine. Developers, because of reasons like basic template, design patterns, or reuse of the definition of specific behavior, use code clones~\cite{kim2004ethnographic,kapser2008cloning}. There exist many tools for detecting bad code clones in codebases~\cite{bellon2007comparison}.\par 
 
-There is much research on information foraging and improving learning by examples~\cite{brandt2009two}. There is also much work in code clones clustering~\cite{codeCloneDetection2019}. As far as these authors are aware, this is the first time work on code clones, and their clustering has been used to help forage for examples within a codebase. Typically code cloning is used to infer duplicate code snippets for refactoring or patching. Researchers have attempted to take relevant pieces from each of these fields, and it is this combination of parts that is the contribution~\cite{kapser2009toward}.\par
+Understanding how developers navigate while they are foraging for information is important. Developers spend 35\% to 50\% of their time navigating through source code during software development activities~\cite{ko2006exploratory,piorkowski2013whats}. Navigating and re-finding place of the code that had already been visited is frequent, difficult and distracting~\cite{ko2005eliciting,deline2005towards}. Many tools  are trying to help developer to optimize code navigation. These tools are clustered into three categories. The first category is structural relationship traversal. These tools find starting point then traverse relationships to find other related code locations~\cite{karrer2011stacksplorer,augustine2015field,latoza2011visualizing}. Another category is recommender tools. Based on the history generated when developers worked on similar tasks, tools predict relevant elements~\cite{zimmermann2005mining,deline2005easing}. Task context navigation is the last category of code navigation tools. They make it easier to navigate back and forth between task context elements~\cite{ko2006exploratory}. Code navigation is still challenging for developers~\cite{albusays2017interviews}. Many research conducted on behaviors of developers while they are working with navigation tools~\cite{ko2006exploratory}, but as far as we know none of them characterized behaviors of developers while they are working with Find Usages tool. It is not clear how it is work in large codebase where there exist many similar usages.\par
 
-Find a similar code in a codebase is one code reuse strategy~\cite{rosson1996reuse}. Developers looking for examples of how to use specific methods or objects~\cite{stylos2006mica,umarji2008archetypal}. Opportunistic developers more likely to use example code rather than systematic developers. There exist techniques for supporting reuse, for instance, IDEs has searching tool that enables developers to search for example across the existing codebase, or IDEs has tool for fining right sequence of methods to complete some tasks that developer already started.\par
+Developer often searching in the codebase to find examples~\cite{rosson1996reuse}. They are looking for examples of how to use specific methods or objects~\cite{stylos2006mica,umarji2008archetypal}. There is much research on information foraging and improving learning by examples~\cite{brandt2009two}. Opportunistic developers are more likely to use example code rather than systematic developers~\cite{head2018not}. There exist several techniques for supporting code reuse. For instance, IDEs has searching tool that enables developers to look for examples across the existing codebase, or IDEs has tool for finding right sequence of methods to complete some tasks that developer already started.\par
+
+Developers often reuse existing code in the codebase to complete their tasks. Finding a similar code in a codebase is one code reuse strategy~\cite{rosson1996reuse}. A common way to edit code is by copying existing code, called code clones~\cite{codeCloneDetection2019,hou2009cnp}. Code clones in many cases is harmful, but there exist some situations that code clones are beneficial. Some of the reasons of using code clone are applying basic template, applying design patterns, or reusing of the definition of specific behavior~\cite{kim2004ethnographic,kapser2008cloning}. Developers clone the code then change it in a way that Many tools are used for detecting bad code clones in codebases~\cite{bellon2007comparison}.\par 
+
 
 
 
 % ***********************************************Exploratory Study***************************************
-\section{Challenges and Benefits of Using Find Usages tool}
+\section{Study 1: Challenges and Benefits of Using Find Usages tool}
+
 We conducted a think-aloud study to understand better current practice and the challenges developers face using existing approaches. The study was in-person, and their interaction and thoughts were recorded. Researchers vocally recorded the process while asking the participant to think-aloud while conducting the study. The participants were allowed to ask for hints or questions or clarifications, but we must not give answers. We were not looking for successful implementation. We were looking for what developers think about the Find Usages interface, without coaxing the answers we may want out of them.\par
 We recruited four participants (P1, P2, P3, P4), two female and two male. The first participant was a graduate computer science student at our institution. The remaining three participants worked as a software developer in the industry, two of them had experienced less than one year, but one of them had more than four years of experience in the industry.\par 
 We designed two tasks for the study. The first task was warm-up task it supposed to train participant how to use Find Usages tool. The second task was implementing a logic in a codebase. In the beginning of study, the tasks were piloted with the graduate student participant to make sure the tasks are designed correctly or not. At the and of study, we asked participants to respond to a survey for collecting their experience. In that survey, we asked participants to share with us 1) challenges, if any, they experienced related to finding a method, variable, or anything. 2) challenges, if any, they experienced as they tried to begin work on these tasks. 3) challenges, if any, they experienced related to understanding and working with the provided codebase. 4) challenges, if any, they experienced related to their productivity.
@@ -182,21 +187,21 @@ The confusing thing about Find Usages is happen when a method is overloaded. Par
 % ***********************************************System***************************************
 \section{Find Unique Usages}
 Result of the think-aloud study revealed there exist challenges in using Find Usages tool, participants overwhelmed with tons of usage, and spent substantial time reading through them. We brainstormed on the results and came up with the idea that the refining result of Find Usages might help developers and increase their productivity. In order to design a better tool for addressing the issues, we must understand what is going on in the developers' world and understand how our tool can make the developers' productivity higher. Therefore, we summarized research findings into storyboards. After that, we designed a tool for IntelliJ IDEA that refines the result of the Find Usages tool. The tool aggregates the results and shows the only relevant results. Relevant results likely depend on a measure of sameness.\par
-The basic idea behind Find Unique Usages is to group results from a standard Find Usages/References IDE operation based on each result's surrounding code. Our approach is to group usages found by the IntelliJ IDEA usage finder and group them based on similar ASTs while presenting the result to the user. Our comparison leveraged the Gumtree Spoon AST Diff framework, where we measured the resulting differing and matching nodes from an object representing the diff. A general overview of our approach is shown in Fig.~\ref{fig:general} 
+The basic idea behind Find Unique Usages is to cluster results from a standard Find Usages/References IDE operation based on each result's surrounding code. Our approach is to cluster usages found by the IntelliJ IDEA usage finder and cluster them based on similar ASTs while presenting the result to the user. Our comparison leveraged the Gumtree Spoon AST Diff framework, where we measured the resulting differing and matching nodes from an object representing the diff. A general overview of our approach is shown in Fig.~\ref{fig:general} 
 
 \begin{figure*}
     \centering
     \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/generlView.pdf}
-    \caption{This figure depicts how the Find Unique Usages tool works. It collects usages and creates an AST for each usage. Then based on similarity and threshold it decides to assign it to an already exist group or create a new group and assign it to that group. }
+    \caption{This figure depicts how the Find Unique Usages tool works. It collects usages and creates an AST for each usage. Then based on similarity and threshold it decides to assign it to an already exist cluster or create a new cluster and assign it to that cluster. }
 \label{fig:general}
 \end{figure*}
 
 
 \subsection{User Interface} 
-As adopting unfamiliar tools may impose an additional burden on developers~\cite{adaption2002}, we implemented Find Unique Usages by extending the existing Find Usages interface in the IntelliJ IDE. We added additional usage groups that contained usages with similar code. As each user group contained usages that were surrounded by similar code, we hypothesized the usages would be in similar contexts, implying more information about the usage.Thusa user could inspect one usage within a usage group and gleam that the other usages within that group were similar and move on to another usage group depending on their task. The task we associate this tool with is finding and parsing a large variety of usages while seeking examples of an internal API.
+As adopting unfamiliar tools may impose an additional burden on developers~\cite{adaption2002}, we implemented Find Unique Usages by extending the existing Find Usages interface in the IntelliJ IDE. We added additional usage clusters that contained usages with similar code. As each user cluster contained usages that were surrounded by similar code, we hypothesized the usages would be in similar contexts, implying more information about the usage.Thusa user could inspect one usage within a usage cluster and gleam that the other usages within that cluster were similar and move on to another usage cluster depending on their task. The task we associate this tool with is finding and parsing a large variety of usages while seeking examples of an internal API.
 
-\subsection{Usage Grouping Back-end} 
-Usages were grouped based on similar code within the usage's containing method code block. For every usage, IntelliJ IDEA calls our aggregate usage method, which returns a reference to a particular usage group. An internal IntelliJ IDEA object is representing groups of usages. Back-end engine compares the given usage with all other usages in all existing usage groups. The back-end engine consider the given usage to be a part of a usage group when it has a guaranteed minimum threshold of similarity with every abstract syntax tree (AST)  associated with that usage group. If all the usage groups have minimum similarities that do not meet the threshold, then back-end creates a new usage group with the supplied usage and then return that usage group. Logic of the back-end is depicted in Fig.~\ref{fig:flowchart}. \par
+\subsection{Usage clustering Back-end} 
+Usages were clustered based on similar code within the usage's containing method code block. For every usage, IntelliJ IDEA calls our aggregate usage method, which returns a reference to a particular usage cluster. An internal IntelliJ IDEA object is representing clusters of usages. Back-end engine compares the given usage with all other usages in all existing usage clusters. The back-end engine consider the given usage to be a part of a usage cluster when it has a guaranteed minimum threshold of similarity with every abstract syntax tree (AST)  associated with that usage cluster. If all the usage clusters have minimum similarities that do not meet the threshold, then back-end creates a new usage cluster with the supplied usage and then return that usage cluster. Logic of the back-end is depicted in Fig.~\ref{fig:flowchart}. \par
 \begin{figure}
     \centering
     \includegraphics [width=\columnwidth,keepaspectratio, clip]{figures/flowchart}
@@ -208,9 +213,9 @@ The back-end has three main parts. The first part is an algorithm (see Algorithm
 
 \begin{algorithm}
 \label{algo1}
-    \caption{Minimum Similarity in a Usage Group - minSimilarity($x$, $G_{i}$)} 
+    \caption{Minimum Similarity in a Usage cluster - minSimilarity($x$, $G_{i}$)} 
     \begin{algorithmic}[1]
-    \State Given a Usage $x$ and a usage group $G_{i}$
+    \State Given a Usage $x$ and a usage cluster $G_{i}$
     % \If{$G_{i}$ = null}
     % \State return  $-\infty$
     % \EndIf
@@ -222,28 +227,28 @@ The back-end has three main parts. The first part is an algorithm (see Algorithm
      \
 \end{algorithm}
 
-The second main part is an algorithm that tries to find the most similar group for the usage that we want to categorize it, pseudocode of this algorithm is prvided in Algorithm 2. This algorithm iterate over all groups and call Algorithm 1 to find the most similar group. After it finds the most similar cluster to the usage it needs to check another constraint. It needs to consider similarity \textit{threshold}. Finding an appropriate threshold is critical. For example if it choose threshold \textgreater 90\% means very similar, \textgreater 70\% means similar, \textless 40\% means not so similar. A small threshold involves many different usages, and a large threshold might lead to a few results~\cite{deng2013top}. We chose a constant for the similarity threshold of approximately 88\%. There is no real justification for this example besides it working well with an example. We came up with 88\% by doing many trials and errors. In the next step, the algorithm compares the minimum similarity that is calculated with the threshold and based on decide to create a new group or add the usage to the most similar group. 
+The second main part is an algorithm that tries to find the most similar cluster for the usage that we want to categorize it, pseudocode of this algorithm is prvided in Algorithm 2. This algorithm iterate over all clusters and call Algorithm 1 to find the most similar cluster. After it finds the most similar cluster to the usage it needs to check another constraint. It needs to consider similarity \textit{threshold}. Finding an appropriate threshold is critical. For example if it choose threshold \textgreater 90\% means very similar, \textgreater 70\% means similar, \textless 40\% means not so similar. A small threshold involves many different usages, and a large threshold might lead to a few results~\cite{deng2013top}. We chose a constant for the similarity threshold of approximately 88\%. There is no real justification for this example besides it working well with an example. We came up with 88\% by doing many trials and errors. In the next step, the algorithm compares the minimum similarity that is calculated with the threshold and based on decide to create a new cluster or add the usage to the most similar cluster. 
 
 \begin{algorithm}
 \label{algo2}
-    \caption{Find Corresponding Usage Group} 
+    \caption{Find Corresponding Usage cluster} 
     \begin{algorithmic}[1]
-    \State // Given a Usage $x$ \& a set of Usage Groups $G$
-    \State $mostSimilarGroup$ $\leftarrow$ $null$
-    \For{each Usage Group $G_{i}$ in $G$}
-    \If{minSimilarity($x$,$mostSimilarGroup$)$<$ minSimilarity($x$, $G_{i}$)}
-    \State $mostSimilarGroup$ $\leftarrow$ $G_{i}$
+    \State // Given a Usage $x$ \& a set of Usage Clusters $G$
+    \State $mostSimilarCluster$ $\leftarrow$ $null$
+    \For{each Usage Cluster $G_{i}$ in $G$}
+    \If{minSimilarity($x$,$mostSimilarCluster$)$<$ minSimilarity($x$, $G_{i}$)}
+    \State $mostSimilarCluster$ $\leftarrow$ $G_{i}$
     \EndIf
     \EndFor
     \State // Given some similarity threshold $T$
-    \If{minSimilarity($x$, $mostSimilarGroup$) $<$ $T$}
-        \State // Create new usage group and modify $G$.
-        \State $G_{new}$ $\leftarrow$ newUsageGroupWithInitialMember($x$)
+    \If{minSimilarity($x$, $mostSimilarCluster$) $<$ $T$}
+        \State // Create new usage cluster and modify $G$.
+        \State $G_{new}$ $\leftarrow$ newUsageClusterWithInitialMember($x$)
         \State $G$ $\leftarrow$ $G$ $\cup$ \{$G_{new}$\}
         % \State return $G_{new}$
     \Else
-    \State addToGroup($mostSimilarGroup$, $x$)
-    % \State return $mostSimilarGroup$
+    \State addToCluster($mostSimilarCluster$, $x$)
+    % \State return $mostSimilarcluster$
     \EndIf
     \end{algorithmic} 
 \end{algorithm}
@@ -272,7 +277,7 @@ Similarity = 2 \times S  \div (2  \times S  + AST1 + AST2)
 \end{equation}
 
 where $S$ is number of shared nodes between two trees, $AST1$ is number of different node in AST that hold usage 1, and $AST2$ is number of different node in AST that hold usage 2. \par
-Another modification was changing string distance algorithms to a more powerful algorithm. We used GumTree~\cite{baxter1998clone,DBLP:conf/kbse/FalleriMBMM14,falleri2014fine}, which leverage the GumTreeDiff algorithm. We chose this algorithm because GumTreeDiff is focused on fine-grained differentiation that is more sensitive to a programmer~\cite{falleri2014fine}. The Gumtree Spoon AST Diff leverages this algorithm while providing more detailed parsing of Java source code. The authors of GumTreeDiff focus on its use in SCM, where we leverage it for grouping potential example code. \par
+Another modification was changing string distance algorithms to a more powerful algorithm. We used GumTree~\cite{baxter1998clone,DBLP:conf/kbse/FalleriMBMM14,falleri2014fine}, which leverage the GumTreeDiff algorithm. We chose this algorithm because GumTreeDiff is focused on fine-grained differentiation that is more sensitive to a programmer~\cite{falleri2014fine}. The Gumtree Spoon AST Diff leverages this algorithm while providing more detailed parsing of Java source code. The authors of GumTreeDiff focus on its use in SCM, where we leverage it for clustering potential example code. \par
 
 
 
@@ -303,7 +308,7 @@ Another modification was changing string distance algorithms to a more powerful 
 
 
 % *************************Evaluation section********************************************************************
-\section{Evaluation}
+\section{Study 2: Find Unique Usage}
 To evaluated the tool that we built in terms of productivity, we conducted an experimental user study in which participants tried to add a feature on a codebase. We recruited 12 participants to implement a method and then analyzed their environment interactions and the resulting code they created. 
 
 \subsection{Method}
@@ -315,7 +320,7 @@ At the end of the study, we conducted a semi-structured interview and asked part
 \begin{figure*}[h]
     \centering
     \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/compare}
-    \caption{In the blue rectangle number 1 screenshot the interface of Find Unique Usages an the in the number 2 the regular Find Usages are depicted. Both approaches open and highlight the first usages, but the Find Unique Usages group them based on ASTs similarity. It helps developer to donot waste their time for reading duplicate results.  }
+    \caption{In the blue rectangle number 1 screenshot the interface of Find Unique Usages an the in the number 2 the regular Find Usages are depicted. Both approaches open and highlight the first usages, but the Find Unique Usages cluster them based on ASTs similarity. It helps developer to donot waste their time for reading duplicate results.  }
 \label{fig:compare}
 \end{figure*}
 
@@ -328,43 +333,46 @@ Several sequential using of Find Usages tool or Find Unique Usages are misleadin
 
 Inline Find Usages might be more useful than seeing results in a separate result window. IntelliJ IDEA has inline Find Usages by pressing control on the keyboard and clicking by mouse on the method that shows a list of usages. In this approach, developers do not go to a separate result window. The result of this approach has a better abstraction. One developer from control group that used this approach she completed the task in 17 minutes. Seventeen minutes was the second minimum of time among the completion time of all participants. Another developer that used this approach was from the experimental group. He completed the task in 13 minutes, which was the lowest among 12 participants. \par
 
-Usages that they accept primitive type like integer are easier to understand than usages they have variables in their input arguments. Results of Find Usages that they have a variable as input parameters, not primitive types, were forcing developers to open the class and read the class to understand the usage. Almost all participants repeated this behavior. They clicked on usage that it had an object as an input argument. Next, they went to the class that the object was an instance of that class. After that, they scrolled over the class's methods and read the code of the class. Sometimes they  (not all participants) called another Find Usage on that class for understanding some methods in that class. It was not clear for experimenters that participants could successfully understand that class or not, but multiple participants loudly said something that I have got lost, which experimenters interpreted that as they failed in the understanding of that class. In the end, participants who were either successful or unsuccessful in understanding the class close that class and come back to the first usage. Since they called another Find Usages, they spent time remembering where they were. Again they called the Find Usage over the first method they were working but left it and went inside a usage. Their behavior was a loop on following activities of going to one usage, clicking on a class, calling anther to find usages, reading code, returning back to the start point. \par
+Usages listed in the results window were easier to read when they contained literals directly in the call site rather than referencing variables or expressions defined elsewhere. Results of Find Usages that they have a variable as input parameters, not primitive types, were forcing developers to open the class and read the class to understand the usage. Almost all participants repeated this behavior. They clicked on usage that it had an object as an input argument. Next, they went to the class that the object was an instance of that class. After that, they scrolled over the class's methods and read the code of the class. Some, but not all participants, tried to understand that class and its methods by invoking Find Usages. It was not clear for experimenters that participants could successfully understand that class or not, but multiple participants loudly said something that I have got lost, which experimenters interpreted that as they failed in the understanding of that class. In the end, participants who were either successful or unsuccessful in understanding the class close that class and come back to the first usage. Since they called another Find Usages, they spent time remembering where they were. Again they called the Find Usage over the first method they were working but left it and went inside a usage. Their behavior was a loop on following activities of going to one usage, clicking on a class, calling anther to find usages, reading code, returning back to the start point. \par
 
 Ua\par
 
-Participants did not skim all results of usages in the beginning. They read result of usages sequentially. They start from the first result in the list then go through the other. The reason that developers start with the first usages is that Find Usages window of IntelliJ IDEA expand and highlight with blue color the first usage. \par
+They read result of usages sequentially. They start from the first result in the list then go through the other.
+The Find Usages view of IntelliJ IDE supports this behavior by expanding and highlighting the first usage. 
+However, most participants did not read all of the usage results.  T\par
 
 
 Almost all participants of both conditions had challenges with overloading. In their task they needed to use a method that it was overloaded. The methods had same name, but they had different number of input parameters or type of input parameters or both. When participants were trying to get the usage, this kind of usage was confusing for them.\par
 
 There was a pattern for productive participants, 1) They utilized Find Usages with Find In Path tools for understanding the codebase.  2) Before start reading usages, they expand usages and skimmed the list of usages. After that decided to go through the best usage that might help them. \par
 
-At the end of the study, we interviewed all participants and asked them to tell us about their experiences. One participant told us that several sequential using of Find Usages tool is misleading.
+At the end of the study, we interviewed  participants about their experiences. One participant told us that several sequential using of Find Usages tool is misleading.
 \begin{quote} "I was getting lost when I was using nested [several sequential] Find Usages for understand codebase." - (C6)\end{quote}
 
  An interesting usability issue that C6 and E3 had with regular Find Usages was the number in the result that shows the line of the statement. They told us they thought this number is the frequency of repeating that statement.\par
  
-We received feedback about the grouping of usages in our approach. Find Unique Usages tool used a similar name for all groups in the list of results (see Fig.~\ref{fig:compare}). It was confusing for 2 of participants (E2 and E4). They suggested us to change the naming convention. Since the name of all groups was similar (see Figure.~\ref{fig:compare}) they were curious how we grouped the usages.\par
+We received feedback about the clustering of usages in our approach. Find Unique Usages tool used a similar name for all clusters in the list of results (see Fig.~\ref{fig:compare}). It was confusing for 2 of participants (E2 and E4). They suggested us to change the naming convention. Since the name of all clusters was similar (see Figure.~\ref{fig:compare}) they were curious how we clustered the usages.\par
 
-Also, we asked them to give us any suggestion that might be useful. Participants gave us a couple of suggestions. The interesting one was C6 told us if they have Call Graphs in combination with Find Usages might be useful. He said Call Graph is a useful tool for understanding large codebases, and I am using Call Graph for understanding them. He told us,  the Call Graph helps to get an abstract view over methods.  Also, he said in this way, developers ignore investigation on some methods and spend most of their time focusing on the basic methods. While C6 was working on his tasks, he called several sequential Find Usages for understanding the code. Then he said he has got lost. At the end of the study, he said if he had had a Call Graph, probably he would not have got lost in usages.     
+One participants (C6) recursively applied find usages, navigating more than one level across the call graph, and reported feeling lost. The participant reported that he felt that supporting more than one level of call navigation was important. 
+
+
+%Also, we asked them to give us any suggestion that might be useful. Participants gave us a couple of suggestions. The interesting one was C6 told us if they have Call Graphs in combination with Find Usages might be useful. He said Call Graph is a useful tool for understanding large codebases, and I am using Call Graph for understanding them. He told us,  the Call Graph helps to get an abstract view over methods.  Also, he said in this way, developers ignore investigation on some methods and spend most of their time focusing on the basic methods. While C6 was working on his tasks, he called several sequential Find Usages for understanding the code. Then he said he has got lost. At the end of the study, he said if he had had a Call Graph, probably he would not have got lost in usages.     
 
 
 % *************************Limitation********************************************************************
 \section{Limitation And Threats To Validity}
-Our study had several limitations and potential threats to the internal and external validity of the results. \par  
+Like all studies, our study had several limitations and potential threats to the validity of the results. \par  
 
-In selecting a task, we sought to identify a task that is representative of a typical large codebase that contains many usages for methods. Smaller or Larger codebase may involve more complex usages where individual behaviors are more challenging to identify. \par 
-
-The second threat is Find Unique Usages approach is dependent on IDE and language. It is not clear if we use it on other IDEs or other languages, the result might be different.\par 
+The first limitation occurred in selecting a task. We sought to identify a task that is representative of a typical large codebase that contains many usages for methods. Smaller or Larger codebase may involve more complex usages where individual behaviors are more challenging to identify. Another threat was, our participants had no experience with the codebase, most developers in the field had knowledge about the codebase. Developers with more knowledge might more successfully predict where they should navigate. Dependency on the programming language and IDE was the third threat. Find Unique Usages approach is dependent on IDE and language. It is not clear if we use it on other IDEs or other languages; the result might be different. The last threat is the number of participants. The first study had only 4 participants, and the second one had 12 participants. If we recruit a higher number of participants, probably the result of the study might be different.
 
 % *************************Discussion********************************************************************
 \section{Discussion}
-Our exploratory study showed there exist challenges in Find Usages tool of IntelliJ IDEA. We designed an approach and implement a tool on top of Find Usages tool of IntelliJ IDEA to fix the issues. Our approach utilize AST diffs of usages for grouping similar usages in one group. The result of controlled experiment showed our approach could decrease 35\% of time completion of implementation a simple logic in a large codebase.
+Our exploratory study showed there exist challenges in the Find Usages tool of IntelliJ IDEA. Three main challenges were, 1) in large codebases, the high number of usages is overwhelming. 2) duplicate usages are a source of time-wasting. 3)developers stick in the first usage. We designed an approach and implemented a tool on top of the Find Usages tool of IntelliJ IDEA to fix the issues. Our approach utilizes AST diffs of usages for similar clustering usages in one cluster. The result of the controlled experiment showed that our approach could decrease 35\% of the completion time of the implementation of simple logic in a large codebase.
 
-The approach that we used for grouping the usage was a naive approach to clustering that we took due to time constraints preventing us from better understanding the IntelliJ SDK. In the future, we hope to re-implement the usage grouping with merging as part of an agglomerate clustering approach. Also, We can work on scalability and response time of the tool \par
+The approach that we used for clustering the usage was a naive approach to clustering that we took due to time constraints preventing us from better understanding the IntelliJ SDK. In the future, we hope to re-implement the usage clustering with merging as part of an agglomerate clustering approach. Also, We can work on scalability and response time of the tool \par
 
 
-A couple of participants complaint about the naming convention of groups. The names of the groups were similar. In future, we must change it to more readable names.\par
+A couple of participants complaint about the naming convention of clusters. The names of the clusters were similar. In future, we must change it to more readable names.\par
 
 IntelliJ IDEA by default expand and highlight the first usages in the list of result. It is not clear what would be behaviors of developers if IDE does not highlight the first usage. A future investigation might be, if Find Usages tool expands all usage by default and do not highlight the first uasge what would be the bevaiors of developers.\par
 
@@ -374,8 +382,7 @@ In future work, this should either be picked based on trying out different thres
 
 % *************************Conclusion********************************************************************
 \section{Conclusion}
-Developers have difficulties in understanding the context of how various internal classes, objects, or methods are used in the codebase. We sought to better understand these challenges by conducting a think-aloud user study with 6 participants. The results of the think-aloud experiment highlighted that developers spend considerable time learning to use internal code artifacts. The result also showed developers use the Find Usages/References tool of IDEs to understand code by example. The results of Find Usages can be long tail of results that developers find difficulty mentally parsing. We also found that find usage/reference results' would contain duplicate examples in disparate locations in the UI, adding to the difficulty of parsing. Based on the think-aloud study. We designed and implemented Find Unique Usages, which groups usages  manipulated result of Find Usages and grouped them based on their similarity. After that, we conducted a controlled experiment with 12 more participants to evaluate our approach. Results showed that this aggregation of Unique examples save 35\% times of developers..
-
+Developers are overwhelmed with duplicate usages results when they are working with Find Usage tool on large codebases to understand the code. We designed and developed a tool that aggregates similar usages. Results of the showed clustering usages based on similarity is useful for developers.
 
 % \section*{Acknowledgment}
 % % [TODO]: mention Dr. Jon Bell. He helped us in first ideation part of the paper.
