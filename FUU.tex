@@ -26,7 +26,7 @@
 \begin{document}
 \linenumbers
 
-\title{Clustering Find Usages Results}
+\title{Clustering Results of Find Usages}
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
 \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
@@ -82,7 +82,7 @@ Developers face many challenges when trying to understand large codebases. In pa
 \end{abstract}
 
 \begin{IEEEkeywords}
-Code navigation, information foraging, Find Usages, Find References, large Codebase
+Code navigation, information foraging, Find Usages, Find References, large Codebase, Plugin
 \end{IEEEkeywords}
 
 
@@ -96,7 +96,7 @@ Developers face many challenges in finding answer to their questions while they 
 Developers frequently search for code examples~\cite{brandt2009two,sadowski2015developers}. Developers spend a significant amount of time navigating and searching existing code for completing their daily tasks~\cite{piorkowski2016foraging,ko2006exploratory}. After they found the example, they are trying to understand it. Developers trying to find usage of that example in different location of the codebase. As a next step, developers often, after finding and understanding the code example, copy and paste the code then change it. A filed study showed developers on average in one hour make four copy and paste code (code clone)~\cite{kim2004ethnographic}. Before they make changes in the cloned code, developers look where the code element is used and how it affects the codebase. In this step developer for addressing their concerns, they again need tools to search and navigate in the codebase.\par
 
 
-Tons of tool exists to help developers to be more productive when they are navigating or searching in codebase~\cite{augustine2015field,ko2006exploratory,albusays2017interviews}. The two most common tools that developers are using in their daily activities are \textit{Find Usages} in Jetbrains IDEs and \textit{Open Call Hierarchy} of Eclipse that Provided this ability for developers. One utilizing example of this tool is that when developers write or edit code, they might come across code elements that they want to change or delete. Before they make changes, they look where the code element is used and how it affects the codebase. Although these tools are the most popular, they have many unaddressed challenges. Results of \textit{Find Usages} are listed in a window in Jetbrains IDEs that developers are going through the results to find the desired usage or understand the codebase. In large codebases, similar usages are frequently happen. Because of that in this kind of codebases, they are facing a high number of duplicate usages.\par
+Tons of tool exists to help developers to be more productive when they are navigating or searching in codebase~\cite{augustine2015field,ko2006exploratory,albusays2017interviews}. The two most common tools that developers are using in their daily activities are \textit{Find Usages} in Jetbrains (www.jetbrains.com) IDEs and \textit{Open Call Hierarchy} of Eclipse that Provided this ability for developers. One utilizing example of this tool is that when developers write or edit code, they might come across code elements that they want to change or delete. Before they make changes, they look where the code element is used and how it affects the codebase. Although these tools are the most popular, they have many unaddressed challenges. Results of \textit{Find Usages} are listed in a window in Jetbrains IDEs that developers are going through the results to find the desired usage or understand the codebase. In large codebases, similar usages are frequently happen. Because of that in this kind of codebases, they are facing a high number of duplicate usages.\par
 
 % Another daily issue is navigation from one statement other to task-related code. Sometimes developers want to go through related statements to understand the codebase. Also, they are facing challenges to answer questions about how a change affects callers. When developers want to change an artifact before changing that they check the side effect of that change. They go through the codebase and evaluate the effect of change on them. There exist multiple approaches for better support of structural navigation.\par
 
@@ -185,13 +185,13 @@ Another typical behavior was that participants were scrolling quickly through us
 The confusing thing about Find Usages is happen when a method is overloaded. Participants had difficulty migrating to the correct Find Usages because of overloaded methods.
 
 % ***********************************************System***************************************
-\section{Find Unique Usages}
+\section{Find Unique Usages Tool}
 Result of the think-aloud study revealed there exist challenges in using Find Usages tool, participants overwhelmed with tons of usage, and spent substantial time reading through them. We brainstormed on the results and came up with the idea that the refining result of Find Usages might help developers and increase their productivity. In order to design a better tool for addressing the issues, we must understand what is going on in the developers' world and understand how our tool can make the developers' productivity higher. Therefore, we summarized research findings into storyboards. After that, we designed a tool for IntelliJ IDEA that refines the result of the Find Usages tool. The tool aggregates the results and shows the only relevant results. Relevant results likely depend on a measure of sameness.\par
 The basic idea behind Find Unique Usages is to cluster results from a standard Find Usages/References IDE operation based on each result's surrounding code. Our approach is to cluster usages found by the IntelliJ IDEA usage finder and cluster them based on similar ASTs while presenting the result to the user. Our comparison leveraged the Gumtree Spoon AST Diff framework, where we measured the resulting differing and matching nodes from an object representing the diff. A general overview of our approach is shown in Fig.~\ref{fig:general} 
 
 \begin{figure*}
     \centering
-    \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/generlView.pdf}
+    \includegraphics [width=\textwidth,keepaspectratio,clip]{figures/Generalview}
     \caption{This figure depicts how the Find Unique Usages tool works. It collects usages and creates an AST for each usage. Then based on similarity and threshold it decides to assign it to an already exist cluster or create a new cluster and assign it to that cluster. }
 \label{fig:general}
 \end{figure*}
@@ -204,7 +204,7 @@ As adopting unfamiliar tools may impose an additional burden on developers~\cite
 Usages were clustered based on similar code within the usage's containing method code block. For every usage, IntelliJ IDEA calls our aggregate usage method, which returns a reference to a particular usage cluster. An internal IntelliJ IDEA object is representing clusters of usages. Back-end engine compares the given usage with all other usages in all existing usage clusters. The back-end engine consider the given usage to be a part of a usage cluster when it has a guaranteed minimum threshold of similarity with every abstract syntax tree (AST)  associated with that usage cluster. If all the usage clusters have minimum similarities that do not meet the threshold, then back-end creates a new usage cluster with the supplied usage and then return that usage cluster. Logic of the back-end is depicted in Fig.~\ref{fig:flowchart}. \par
 \begin{figure}
     \centering
-    \includegraphics [width=\columnwidth,keepaspectratio, clip]{figures/flowchart}
+    \includegraphics [width=\columnwidth,keepaspectratio, clip]{figures/flowchart2}
     \caption{Flowchart shows how the back-end of Find Unique Usages work. }
 \label{fig:flowchart}
 \end{figure}
@@ -313,7 +313,7 @@ To evaluated the tool that we built in terms of productivity, we conducted an ex
 
 \subsection{Method}
 
-We recruited 12 more unpaid participants by advertising on our groups of social networks. We use a label for referencing participants. C1, C2,..., C5, C6 worked in control condition. E1, E2,..., E5, E6 worked in the experimental group. 33\% of participants were female, and 66\% were male. Five participants were graduate students, four were working as software developers, and 3 were undergraduates. We randomly assigned participants into a control and experimental condition. All participants used the IntelliJ IDE. Control participants used the Find Usages tool, while experimental participants instead of working with default Find Usage told of IntelliJ IDEA they must work with Find Unique Usages tool. 
+We recruited 13 unpaid participants by advertising on our groups of social networks. One of the participants left the study in the middle. The participant had three years of experience in Java, but that experience was a while ago. Because of that, he could not remember the syntax of Java and left the study. We exclude the result of that participant from the analysis. We use a label for referencing participants. C1, C2,..., C5, C6 worked in control condition.  Participants of the experimenter condition labeled as E1, E2,..., E5, E6. 33\% of participants were female, and 66\% were male. Five participants were graduate students, four were working as software developers, and 3 were undergraduates. We randomly assigned participants into a control and experimental condition. All participants used the IntelliJ IDE. Control participants used the Find Usages tool, while experimental participants, instead of working with default Find Usage told of IntelliJ IDEA they must work with Find Unique Usages tool. 
 Participants again completed the same task as in the exploratory study, described in Section \ref{tasks}. Participants had comparable levels of Java experience, with 60 months for control participants and 62 for experimental participants.\par 
 At the end of the study, we conducted a semi-structured interview and asked participants about their experience using the tool.
 
