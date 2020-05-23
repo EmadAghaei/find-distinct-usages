@@ -1,4 +1,7 @@
 \documentclass[conference]{IEEEtran}
+%DIF LATEXDIFF DIFFERENCE FILE
+
+
 \IEEEoverridecommandlockouts
 
 \usepackage{cite}
@@ -14,6 +17,7 @@
 \usepackage[inline]{enumitem}
 \usepackage{listings}
 \usepackage[switch]{lineno}
+
 \lstset{
   numbers=right,
   stepnumber=1,    
@@ -23,6 +27,83 @@
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
 \begin{document}
 
 
@@ -31,27 +112,75 @@
 
 
 
-\author{
-\IEEEauthorblockN{Emad Aghayi}
+\author{\DIFdelbegin %DIFDELCMD < \IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+%DIFDELCMD < \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+%DIFDELCMD < \textit{name of organization (of Aff.)}\\
+%DIFDELCMD < City, Country \\
+%DIFDELCMD < email address}
+%DIFDELCMD < %%%
+\DIFdelend 
+\DIFaddbegin \IEEEauthorblockN{Emad Aghayi}
 \IEEEauthorblockA{\textit{Department of Computer Science} \\
 \textit{George Mason University}\\
 Fairfax, VA \\
 eaghayi@gmu.edu}
-\and
-\IEEEauthorblockN{Aaron Massey}
+\DIFaddend \and
+\DIFdelbegin %DIFDELCMD < \IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+%DIFDELCMD < \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+%DIFDELCMD < \textit{name of organization (of Aff.)}\\
+%DIFDELCMD < City, Country \\
+%DIFDELCMD < email address}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \IEEEauthorblockN{Aaron Massey}
 \IEEEauthorblockA{\textit{Department of Computer Science} \\
 \textit{George Mason University}\\
 Fairfax, VA \\
 amassey5@gmu.edu}
-\and
-\IEEEauthorblockN{Thomas D. LaToza}
+\DIFaddend \and
+\DIFdelbegin %DIFDELCMD < \IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+%DIFDELCMD < \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+%DIFDELCMD < \textit{name of organization (of Aff.)}\\
+%DIFDELCMD < City, Country \\
+%DIFDELCMD < email address}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \IEEEauthorblockN{Thomas D. LaToza}
 \IEEEauthorblockA{\textit{Department of Computer Science} \\
 \textit{George Mason University}\\
 Fairfax, VA \\
 tlatoza@gmu.edu}
-}
+\DIFaddend }
 
-\maketitle
+%DIF <  \author{
+%DIF <  \IEEEauthorblockN{Emad Aghayi}
+%DIF <  \IEEEauthorblockA{\textit{Department Of computer Science} \\
+%DIF <  \textit{George Mason University}\\
+%DIF <  Fairfax, VA \\
+%DIF <  eaghayi@gmu.edu}
+%DIF <  \and
+%DIF <  \IEEEauthorblockN{Aaron Massey}
+%DIF <  \IEEEauthorblockA{\textit{Department Of computer Science} \\
+%DIF <  \textit{George Mason University}\\
+%DIF <  Fairfax, VA \\
+%DIF <  amassey5@gmu.edu}
+%DIF <  \and
+%DIF <  \IEEEauthorblockN{Thomas LaToza}
+%DIF <  \IEEEauthorblockA{\textit{Department Of computer Science} \\
+%DIF <  \textit{George Mason University}\\
+%DIF <  Fairfax, VA \\
+%DIF <  tlatoza@gmu.edu}
+%DIF <  % \and
+%DIF <  % \IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+%DIF <  % \IEEEauthorblockA{\textit{Department Of computer Science} \\
+%DIF <  % \textit{George Mason University}\\
+%DIF <  % Fairfax, VA \\
+%DIF <  % email address or ORCID}
+%DIF <  }
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \maketitle
 
 \begin{abstract}
 When working in large and complex codebases, developers face challenges using \textit{Find Usages} to understand how to reuse classes and methods. To better understand these challenges, we conducted a small exploratory study with 4 participants. We found that developers often wasted time reading long lists of similar usages or prematurely focused on a single usage. Based on these findings, we hypothesized that clustering usages by the similarity of their surrounding context might enable developers to more rapidly understand how to use a function. To explore this idea, we designed and implemented \textit{Find Unique Usages}, which extracts usages, computes a diff between pairs of usages, generates similarity scores, and uses these scores to form usage clusters. To evaluate this approach, we conducted a controlled experiment with 12 participants. We found that developers with \textit{Find Unique Usages} were  significantly  faster,  completing  their  task  in  35\%  less time.
@@ -59,7 +188,11 @@ When working in large and complex codebases, developers face challenges using \t
 
 
 
-\begin{IEEEkeywords}
+%DIF <  Aaron: "The  results  of  the  think-aloud6experiment  highlighted  that  developers  spend  considerable  time7learning  to  use  internal  code  artifacts." This might be too strong of a statement. What we found is that given only access to the source code of the artifacts and examples on its usage within a codebase, there was some difficulty or at least time spent.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \begin{IEEEkeywords}
 Software reuse, code navigation, programming tools, development environments
 \end{IEEEkeywords}
 
@@ -67,13 +200,20 @@ Software reuse, code navigation, programming tools, development environments
 % ***********************************************Introduction***************************************
 \section{Introduction}
 
-When developers look to reuse existing functionality in their codebase by interacting with classes and calling methods, developers work to understand existing code. Developers report that understanding existing code is one of their most time-consuming activities~\cite{latoza2006maintaining}. Developers generally avoid relying on documentation, which is frequently out of date and poorly written~\cite{documentation} and may not answer low-level questions about hidden contracts, implementation details, or side effects~\cite{head2018not}. Instead, developers tend to rely primarily on the code itself~\cite{head2018not, latoza2006maintaining}. The most frequent developer activity is code search~\cite{singer2010examination}, where developers most often look for code examples ~\cite{sadowski2015developers}. 
-% 50\% of developers search for code frequently and 39\% search occasionally~\cite{sim2011well}, and 
-94\% of developers search when they are working on maintenance tasks~\cite{lawrance2008using}. To do these searches, developers spend a significant amount of time navigating existing code~\cite{piorkowski2016foraging,ko2006exploratory}. Given the centrality of navigating code to find and understand examples in programming tasks, even small improvements in making this process more successful and effective may have an important impact. 
+When developers look to reuse existing functionality in their codebase by interacting with classes and calling methods, developers work to understand existing code. Developers report understanding existing code is one of their most time-consuming activities~\cite{latoza2006maintaining}. Developers generally avoid relying on documentation, which is frequently out of date and poorly written~\cite{documentation} and may not answer low-level questions about hidden contracts, implementation details, or side effects~\cite{head2018not}. Instead, developers tend to rely primarily on the code itself~\cite{head2018not, latoza2006maintaining}. \DIFdelbegin \DIFdel{Developers frequently searchfor code examples~\mbox{%DIFAUXCMD
+\cite{brandt2009two,sadowski2015developers} }\hspace{0pt}%DIFAUXCMD
+and }\DIFdelend \DIFaddbegin \DIFadd{The most frequent developer activity is code search~\mbox{%DIFAUXCMD
+\cite{singer2010examination,brandt2009two,sadowski2015developers}}\hspace{0pt}%DIFAUXCMD
+. 50\% of developers search for code frequently and 39\% search occasionally~\mbox{%DIFAUXCMD
+\cite{sim2011well}}\hspace{0pt}%DIFAUXCMD
+, and 92\% of developers searched when they were working on maintenance tasks~\mbox{%DIFAUXCMD
+\cite{lawrance2008using}}\hspace{0pt}%DIFAUXCMD
+. Therefore, developers }\DIFaddend spend a significant amount of time navigating and searching existing code~\cite{piorkowski2016foraging,ko2006exploratory}. \DIFaddbegin \DIFadd{Given the centrality of code search to understanding how to reuse functionality within a codebase, even small improvements in making this process more successful and effective may have an important impact. 
+}\DIFaddend 
 
 
 
-A variety of tools assist developers in navigating and searching code~\cite{augustine2015field,ko2006exploratory,albusays2017interviews}. Modern development environments offer tools for developers to \textit{Find Usages} or navigate the \textit{Call Hierarchy}. For example, the JetBrains IDE offers developers a window which lists results of all usages of a class or method. To understand how to use a method, a developer may simply read each invocation of a method. In this way, these IDE features are envisioned to support the process of code reuse and help developers to identify and understand the ways in which methods are used.
+A variety of tools assist developers in navigating and searching code~\cite{augustine2015field,ko2006exploratory,albusays2017interviews}. Modern development environments offer tools to \textit{Find Usages} or navigate the \textit{Call Hierarchy}. For example, the JetBrains IDE offers developers a window which lists results of all usages of a class or method. To understand how to use a method, a developer may simply read each invocation of a method. In this way, these IDE tools are envisioned to support the process of code reuse and help developers to identify and understand the ways in which methods are used.
 
 
 %of Eclipse that Provided this ability for developers. One utilizing example of this tool is that when developers write or edit code, they might come across code elements that they want to change or delete. Before they make changes, they look where the code element is used and how it affects the codebase. Although these tools are the most popular, they have many unaddressed challenges. In large codebases, similar usages are frequently happen. Because of that in this kind of codebases, they are facing a high number of duplicate usages.\par
@@ -92,7 +232,7 @@ A variety of tools assist developers in navigating and searching code~\cite{augu
 % Developers, when they write or edit code, they might come across code element that they want to change or delete. Before they make changes, they look where the code element is used and how it affects the codebase. \textit{Find Usages} tool in Jetbrains IDEs and \textit{Open Call Hierarchy} tool of Eclipse Provided this ability for developers. Results of \textit{Find Usages} are listed in a window in Jetbrains IDEs that developers are going through the results to find the desired usage or understand the codebase. In large codebases similar usages is more possible, because of that in this kind of codebases they are facing with with high number of duplicate usages.\par
 
 
-To investigate the challenges developers may face in using \textit{Find Usages} to reuse code, we conducted a small exploratory study where we observed four developers implementing a feature in an open source codebase. We found that developers sometimes became overwhelmed by the number of usage results listed. Instead of investigating more usages, participants instead focused on a single usage as an example for some time before moving on to investigate other potentially better examples. This would result in participants learning less from code examples through usages than they could have.
+To investigate the challenges developers may face in using \textit{Find Usages} to reuse code, we conducted a small exploratory study where we observed four developers implementing a feature in an open source codebase. We found that developers sometimes became overwhelmed by the number of usage results listed. Instead of investigating more usages, participants instead focused on a single usage as \DIFdelbegin \DIFdel{as }\DIFdelend an example for some time before moving on to investigate other potentially better examples. This would result in participants learning less from code examples through usages than they could have.
 Based on these findings, we hypothesized that, rather than listing all usages separately, developers might be able to more rapidly understand how to use a function through a usages view organized into groups based on the similarity of the surrounding code. \par
 
 To explore this idea, we propose \textit{Find Unique Usages}, which clusters usages by similarity and displays usage clusters to the developer. \textit{Find Unique Usages} extracts usages of elements, computes a diff between pairs of usages, generates similarity scores, and uses these scores to form usage clusters.
@@ -116,9 +256,9 @@ Understanding how developers navigate while foraging for information is importan
 
 One reason developers forage for information is to find code examples~\cite{rosson1996reuse, brandt2009two}. Developers look for examples of how to use specific methods or objects~\cite{stylos2006mica,umarji2008archetypal}. Opportunistic developers are more likely to use example code rather than systematic developers~\cite{head2018not}. There exist a number of techniques intended to support code reuse. For instance, IDEs have search tools that enable developers to look for example code.\par
 
-Developers often reuse existing code in their codebase to complete their tasks. A common way to edit code is by copying similar existing code, creating a code clone~\cite{codeCloneDetection2019,hou2009cnp}. Developers create code clones to apply basic templates, apply design patterns, or reuse the definition of specific behavior~\cite{kim2004ethnographic,kapser2008cloning}. Code clones in many cases are harmful, but there may be some situations where code clones are beneficial.  Many tools detect harmful code clones in codebases, identifying code duplication indicating code smells to be refactored~\cite{bellon2007comparison}. Our tool builds on this work, adapting ideas for finding duplicated code to helping developers understand similar usage sites.\par
+Developers often reuse existing code in their codebase to complete their tasks. A common way to edit code is by copying similar existing code, creating a code clone~\cite{codeCloneDetection2019,hou2009cnp}. Developers create code clones to apply basic templates, apply design patterns, or reuse the definition of specific behavior~\cite{kim2004ethnographic,kapser2008cloning}. Code clones in many cases are harmful, but there may be some situations where code clones are beneficial.  Many tools detect harmful code clones in codebases~\cite{bellon2007comparison}. \DIFaddbegin \DIFadd{Our tool is innovative in adopting the idea of code clone detection approaches to the problem of summarizing usage sites. Existing code clone detectors focus on identifying code duplication indicating code smells to be refactored.}\DIFaddend \par
 
-%Our work builds on these past studies and tools, contributing a study of how developers work with the \textit{Find Usages} tool and a novel technique for reducing information overload in its use.
+Our work builds on these past studies and tools, contributing a study of how developers work with the \textit{Find Usages} tool and a novel technique for reducing information overload in its use.
 
 % The last sentence here isn't very good and should be rewritten.
 
@@ -138,7 +278,7 @@ Developers often reuse existing code in their codebase to complete their tasks. 
 To better understand how developers use \textit{Find Usages} and the challenges they face, we conducted a formative observational study in which 4 participants worked to implement a feature in an unfamiliar codebase.
 
 \subsection{Method}
-We recruited four participants (P1, P2, P3, P4), two female and two male. The first participant (P1) was a graduate computer science student at our institution and participated as a pilot participant. The remaining three participants worked as a software developer in industry. Two participants had less than a year of industry experience (P2 and P4), and the third had more than four years of experience (P3).\par 
+We recruited four participants (P1, P2, P3, P4), two female and two male. The first participant \DIFaddbegin \DIFadd{(P1) }\DIFaddend was a graduate computer science student at our institution and participated as a pilot participant. The remaining three participants worked as a software developer in industry. Two participants had less than a year of industry experience \DIFaddbegin \DIFadd{(P2 and P4)}\DIFaddend , and the third had more than four years of experience \DIFaddbegin \DIFadd{(P3)}\DIFaddend .\par 
 
 %We designed two tasks for the study. The first task was training task it supposed to train participant how to use \textit{Find Usages} tool. The second task was implementing a logic in a codebase. We collected data from the interaction of developers while they were working on both tasks. \par
 
@@ -173,10 +313,10 @@ We piloted our initial study design with the graduate student participant (P1). 
 
 \subsection{Results}
 
-All three participants successfully completed the main task, working for 49, 20, 42 minutes. We examined their activity to understand their use of \textit{Find Usages} and the challenges they faced. 
+\DIFaddbegin \subsubsection{\DIFadd{Quantitative results}}\DIFaddend All three participants successfully completed the main task, working for 49, 20, 42 minutes. We examined their activity to understand their use of \textit{Find Usages} and the challenges they faced. 
 %One of them used the term "implemented" to mean "usage" frequently. 
 
-Participants were often exploratory in their work, making decisions without exhaustively gathering evidence. 
+\DIFaddbegin \subsubsection{\DIFadd{Qualitative results}}\DIFaddend Participants were often exploratory in their work, making decisions without exhaustively gathering evidence. 
 %In some cases, participants did not have a strong evidence or reason for understanding the codebase. They were trying to use their feeling. 
 \begin{quote}"I do not know how .layout() is used but I am going to use it because it's in this code" - (P2) \end{quote}
 \begin{quote}"I feel like this [.layout()] should just work, I hope!" - (P4) \end{quote}
@@ -185,19 +325,20 @@ Participants were often exploratory in their work, making decisions without exha
 \begin{quote}"Overwhelmed by the amount of code." - (P2) \end{quote}
 \begin{quote}"Large codebases are my biggest fear." - (P4) \end{quote}
 
-Two participants used the unit tests included in the project as examples to determine how methods are typically invoked and what the possible input arguments for those methods may be. Participants often stuck with a specific test case, and did not go looking for others. 
+\DIFdelbegin \DIFdel{Participants }\DIFdelend \DIFaddbegin \DIFadd{Two participants }\DIFaddend used the unit tests included in the project \DIFdelbegin \DIFdel{to }\DIFdelend as examples to determine how methods are typically invoked and what the possible input arguments for those methods may be. Participants often stuck with a specific test case, and did not go looking for others. 
 \begin{quote} "Tests are a good example of uses." - (P3)\end{quote}
 
-The similarity of \textit{Find Usages} results was a significant challenge for participants. When many results were found (e.g., Fig.~\ref{fig:usege}), it was challenging for participants to identify useful information in understanding the method or object. 
-Much of the code looked similar, and it was difficult for the participant to observe differences. This was particularly challenging when usages were complex, and they navigated call graphs.
+The similarity of \textit{Find Usages} results was a significant challenge for participants. When many results were found (e.g., Fig.~\ref{fig:usege}), it was challenging for participants\DIFaddbegin \DIFadd{. 
+}\DIFaddend %to identify useful information in understanding the method or object. 
+Much \DIFaddbegin \DIFadd{of the }\DIFaddend code looked similar, and \DIFdelbegin \DIFdel{it }\DIFdelend was difficult for the participant \DIFaddbegin \DIFadd{to }\DIFaddend observe differences. This was particularly challenging when usages were complex and they navigated call graphs.
 \begin{quote}"There were a ton of methods and usages that were really similar and it was a lot to put together"- (P4)\end{quote}
 \begin{quote}"I had difficulty finding usages with low complexity of calls and uses"- (P4)\end{quote}
 
-Participants often scrolled quickly through usages when the surrounding code did not make calls similar to those they wished to make. All participants sometimes navigated to usages that did not help them complete the task and wasted time. 
+Participants often scrolled quickly through usages when the surrounding code did not \DIFdelbegin \DIFdel{making }\DIFdelend \DIFaddbegin \DIFadd{make }\DIFaddend calls similar to those \DIFdelbegin \DIFdel{she }\DIFdelend \DIFaddbegin \DIFadd{they }\DIFaddend wished to make. \DIFdelbegin \DIFdel{Participants }\DIFdelend \DIFaddbegin \DIFadd{All participants }\DIFaddend sometimes navigated to usages \DIFdelbegin \DIFdel{, which }\DIFdelend \DIFaddbegin \DIFadd{that }\DIFaddend did not help them complete the task and wasted time. 
 Surprisingly, participants tended to focus on the first usage. By default, IntelliJ IDEA highlights the first usage in the results window. Participants copied the first usage, pasted it where this wished to reuse the functionality, and adapted it as they needed.\par 
 
 %The confusing thing about \textit{Find Usages} is happen when a method is overloaded. 
-One participant had difficulty working with \textit{Find Usages} in the presence of overloaded methods. When they found usages where the types or number of input arguments were different, they navigated between them to understand why there were different implementations of a method.
+\DIFdelbegin \DIFdel{Participants }\DIFdelend \DIFaddbegin \DIFadd{One participant }\DIFaddend had difficulty working with \textit{Find Usages} in the presence of overloaded methods. When they found usages where the types or number of input arguments were different, they navigated between them to understand why there were different implementations of a method.
 
 % ***********************************************System***************************************
 
@@ -228,7 +369,7 @@ To explore this hypothesis, we designed \textit{Find Unique Usages} (Fig.\ref{fi
 In the first step, \textit{Find Unique Usages} collects usages from the codebase. For each usage, it generates an AST, which includes the entire body of the method containing the usage. The list of usage statements is retrieved through the IntelliJ API. IntelliJ is then used to generate an AST for each usage. 
 %It also has another API for accessing any Program Structure Interface (PSI) elements. It gives a tree for any element of the codebase. We passed usages one by one as an element to the API. Then the API provides a tree for that element. Traversing the tree give information about parents or child of each usage. The backend by traversing trees for each of the code blocks that usages are placed creates an AST.
 \par
- 
+
 In our initial design, we considered usages as only the usage statement itself and did not consider any of the code surrounding the usage. In preliminary tests of our tool, we found that the results found remained similar to \textit{Find Usages}. We thus increased the scope of the usage to the entire method body containing the usage. 
 %We tried to find the similarity among trees (code block around usages) instead of leaf nodes (usage statements) of ASTs. Therefore, we increased the scope and consider the entire body of the method that usage places in as a sub-tree.  Our approach creates an AST from all elements there exist in the body of the method.
 \par
@@ -331,48 +472,43 @@ We recruited 13 participants by advertising on social networks. One participant 
 %of the participants left the study in the middle. This participant had three years of experience in Java, but that experience was a while ago. Because of that, he could not remember the syntax of Java and left the study. We exclude the result of that participant from the analysis. 
 33\% of participants were female, and 66\% male. Five participants were graduate students, four worked as a software developers, and 3 were undergraduates. Participants in both conditions had comparable levels of Java experience, with 60 months for control and 62 for experimental participants. All participants were volunteers.\par
 
-Participants were randomly assigned to a control  or experimental condition. Two of the undergraduates were in the experimental condition, and one was in the control condition.  All participants used the IntelliJ IDEA. Control participants used the regular \textit{Find Usages} tool and experimental participants used \textit{Find Unique Usages}.
+Participants were randomly assigned to a control  or experimental condition. \DIFaddbegin \DIFadd{Two of the undergraduates were in the experimental condition, and one was in the control condition.  }\DIFaddend All participants used the IntelliJ IDEA. Control participants used the regular \textit{Find Usages} tool and experimental participants used \textit{Find Unique Usages}.
 Participants completed the same tasks as tasks in the exploratory study.
 At the end of the study, we conducted a semi-structured interview and asked participants about their experiences using the \textit{Find Unique Usages} and \textit{Find Usages} tools.
 
 
 \subsection{Results}
-\subsubsection{Task performance}
-All participants in both conditions successfully completed the task. Experimental participants completed the task in significantly less time (t = 1.82, p $<$ 0.049), 
-% 0.049094   1.82366,
-finishing in 21.5 minutes (SD = 7.65) compared to 33 minutes for control participants (SD = 9.35). The effect size for Glass's delta is 1.24
-%1.236559 
-and for Cohen's d = 1.36
-%1.361257
-. This indicates that the mean of the experimental group is at the $90_{th}$ percentile of the control group.  
+\DIFaddbegin \subsubsection{\DIFadd{Time completion of tasks}}
+\DIFaddend All participants in both conditions successfully completed the task. Experimental participants completed the task in significantly less time (t = 1.82366, p $<$ 0.049094), finishing in \DIFdelbegin \DIFdel{23.33 }\DIFdelend \DIFaddbegin \DIFadd{21.5 }\DIFaddend minutes (SD = 7.65) compared to \DIFdelbegin \DIFdel{32.33 }\DIFdelend \DIFaddbegin \DIFadd{33 }\DIFaddend minutes for control participants (SD = 9.35). \DIFaddbegin \DIFadd{The effect size for Glass's delta is 1.236559 and for Cohen's d =  1.361257. This indicates that the mean of the experimental group is at the $90_{th}$ percentile of the control group.  
+}\DIFaddend 
 
 %in a median of 21.5 minutes, compared to 33 minutes in the control condition. The 6 participants who worked with \textit{Find Unique Usages} (M = 23.33, SD = 7.65) compared to the 6 participants in the control group (M = 32.33, SD = 9.35) need significantly lower time for completion tasks. The t-value is 1.82366. The p-value is 0.049094. The result is significant at p \textless 0.05.\par
 
 %A qualitative data the behaviors of developers might be useful for understanding the challenges and benefits of our tool. We observed the behaviors of developers and labeled them to find a pattern from their activities while they were working on the task. The below behaviors are shared between both the control and experimental groups. The reason that they had many common behaviors was the user interface for our tool and the regular \textit{Find Usages} tool was similar.\par
 
-\subsubsection{Interacting with lists of usages} All participants in both groups read lists of usages sequentially. They began from the first result in the list and proceeded further.
+\DIFdelbegin \DIFdel{Participants }\DIFdelend \DIFaddbegin \subsubsection{\DIFadd{Interacting with lists of results}} \DIFadd{all participants of both groups }\DIFaddend read results of usages sequentially. They began from the first result in the list and proceeded further.
 The \textit{Find Usages} view of IntelliJ IDE supports this behavior by expanding and highlighting the first usage. 
-However, none of the participants read all of the usage results. 
-More successful participants used a strategy in which they first used \textit{Find Usages} with the \textit{Find In Path} tools for understanding the codebase. Before they started reading usages, they expanded and skimmed the list of usages. From this, they selected the best usage that might help them. \par
+However, \DIFdelbegin \DIFdel{most participants did not }\DIFdelend \DIFaddbegin \DIFadd{none of participants }\DIFaddend read all of the usage results. 
+More successful participants used a specific strategy.  They first utilized the \textit{Find Usages} with the \textit{Find In Path} tools for understanding the codebase. Before they started reading usages, they expanded and skimmed the list of usages. From this, they selected the best usage that might help them. \par
 
 
 Usages listed in the results window were easier to read when they contained literals directly in the call site rather than referencing variables or expressions defined elsewhere. When they did contain variables, developers were forced to open the class containing the usage to read and understand it. \par
 
 
-\subsubsection{Navigating between the list of usages and code}Almost all participants cycled through the following steps.
+\DIFaddbegin \subsubsection{\DIFadd{Navigation between list of results and codebase}}\DIFaddend Almost all participants cycled through the following steps.
 Participants first clicked on a usage that had an object as an input argument. Next, they went to the class defining the object. They scrolled over the class's methods and read the code of the class. Some, but not all, tried to understand that class and its methods by invoking \textit{Find Usages}. Several participants then reported being lost and experienced difficulty understanding the class. In either case, participants then returned back to the first usage. As they had invoked another Find Usage command, they spent time remembering where they were and re-invoking the first command they began with. In this way, participants cycled through the steps of 
 selecting a usage, navigating to the class defining the usage, invoking another find usage to understand usages of this code, reading code, and returning back to the starting point. \par
 
-All participants experienced challenges making recursive use of \textit{Find Usages}. Participants selected a usage, opened the class containing that usage, and again invoked \textit{Find Usages} on other methods. After invoking \textit{Find Usages} several times, they sometimes lost their place in the call graph and became disoriented. \par
+\DIFdelbegin \DIFdel{Participants }\DIFdelend \DIFaddbegin \DIFadd{All participants }\DIFaddend experienced challenges making recursive use of \textit{Find Usages}. Participants selected a usage, opened the class containing that usage, and again invoked \textit{Find Usages} on other methods. After invoking \textit{Find Usages} several times, they sometimes lost their place in the call graph and became disoriented. \par
 %Thus they left the usage and came back to the list of results. After that, they move to another usage.
 
-In both conditions, four participants struggled with information overload. For example, in their task, they needed to use a method that was overloaded. This lead to methods that had the same name, but had a different number of input parameters, types of input parameters, or both. When participants were using \textit{Find Usages}, this confused them.\par
+In both conditions, \DIFdelbegin \DIFdel{almost all }\DIFdelend \DIFaddbegin \DIFadd{four }\DIFaddend participants struggled with information overload. For example, in their task, they needed to use a method that was overloaded. This lead to methods that had the same name, but had a different number of input parameters, types of input parameters, or both. When participants were trying to \textit{Find Usages}, this confused them.\par
 
 
-\subsubsection{Usability issues}
-At the end of the study, we interviewed  participants about their experiences. Participants reported a number of usability issues. One participant reported that recursive use of \textit{Find Usages} was confusing. 
+\DIFaddbegin \subsubsection{\DIFadd{Usability issues}}
+\DIFaddend At the end of the study, we interviewed  participants about their experiences. Participants reported a number of usability issues. One participant reported that recursive use of \textit{Find Usages} was confusing. 
 \begin{quote} "I was getting lost when I was using nested [several sequential] \textit{Find Usages} for understand codebase." - (C6)\end{quote}
-\noindent C6 and E3 experienced a usability issue with the line number of the usage statement in the file, which they instead interpreted as the frequency.
+\noindent C6 and E3 experienced a usability issue with the number showing the line of the usage statement in the file, which they instead interpreted as the frequency of the repeating statement.
 E2 and E4 found the use of the same name for all clusters in \textit{Find Unique Usages} to be confusing (see Fig.~\ref{fig:compare}). 
 C6 specifically requested support for combining \textit{Find Usages} with call graph navigation to better support recursively investigating usages. During the study, he got lost and felt that a call graph navigation tool would help him stay oriented more easily.\par
 %It was confusing for 2 of participants (E2 and E4). They suggested us to change the naming convention. Since the name of all clusters was similar (see Figure.~\ref{fig:compare}) they were curious how we clustered the usages.\par
@@ -391,17 +527,17 @@ IntelliJ IDEA offers an inline list of \textit{Find Usages}, invoked by pressing
 
 
 % *************************Limitation********************************************************************
-\section{Limitations And Threats To Validity}
+\section{\DIFdelbegin \DIFdel{Limitation }\DIFdelend \DIFaddbegin \DIFadd{Limitations }\DIFaddend And Threats To Validity}
 Like all studies, our study has several important limitations and potential threats to validity. 
 Unlike most developers, our participants had no experience with the codebase in which they worked. Developers with more knowledge might navigate less and rely more on their existing code knowledge, resulting in different interactions with \textit{Find Usages}. 
-Developers also did not benefit from documentation or the ability to ask coworkers questions, which might have changed their information needs and the strategies they used to satisfy them. 
+Developers also did not benefit from documentation or the ability to ask coworkers questions, which might \DIFaddbegin \DIFadd{have }\DIFaddend changed their information needs and the strategies they used to satisfy them. 
 To ensure participants were familiar with \textit{Find Usages}, we trained them in its use, enabling a comparison between use of \textit{Find Usages} and \textit{Find Unique Usages}. But participants may not have been familiar with other alternative navigational aids, which they might have instead used. In choosing the codebase in which participants worked, we sought to identify a representative Java codebase of medium size. But codebases with usage sites which differed, such as by containing more or fewer literals or overloaded methods, might have led to different results.
 
 
 
 % *************************Discussion********************************************************************
 \section{Discussion}
-Our exploratory study demonstrated that developers can face significant challenges in using \textit{Find Usages} to understand how to reuse a method or class. Developers faced challenges with the high number of similar usages, often focusing on the first usage without considering others. To help developers more easily survey the range of usages, we developed a new technique to identify unique usages. Our approach utilizes AST diffs of usage contexts to cluster similar usages. We found that developers with \textit{Find Unique Usages} were able to complete a task implementing simple logic in an unfamiliar codebase in 35\% less time. 
+Our exploratory study demonstrated that developers face challenges in using \textit{Find Usages}. Developers faced challenges with the high number of similar usages, often focusing on the first usage without consideration of the rest. To help developers more easily survey the set of usages, we developed a new technique to help developers find unique usages. Our approach utilizes AST diffs of usage contexts to cluster similar usages. We found that developers with \textit{Find Unique Usages} were able to complete a task implementing simple logic in an unfamiliar codebase in 35\% less time. 
 
 
 Only one participant surveyed all usages before beginning reading usages. By default, both \textit{Find Unique Usages} and \textit{Find Usages} in IntelliJ expand and highlight the first usage in the list. This may be one reason many developers choose to focus on the first usage. It is unclear how developers' behavior might change if the IDE did not highlight this first usage. An alternative design might be to expand all usages by default and not highlight any usage. 
@@ -409,21 +545,21 @@ This design is similar to the inline \textit{Find Usages} offered, which provide
 
 %Only one participants before starting reading usages expand all behaviors. He could complete the task in rank of 4th among 12 participants, that expanding might helped him.\par
 
-\textit{Find Unique Usages} is highly sensitive to the threshold selected, which determines the number of clusters created. Future work might more systematically investigate the impact of the number of clusters chosen. The developer might also be given more direct control, helping them to see an overview of clusters and drill into interesting clusters in more detail.
-More broadly, many questions remain about just what makes a usage distinct for a developer and how developers might wish to understand these usage clusters.\par
+\textit{Find Unique Usages} is very sensitive to the threshold selected, determining the number of clusters created. A more systematic investigation might be used to understand what number of clusters best help developers achieve identifying distinct usages without being overwhelmed by similar usages. Alternatively, the user might be given control to increase or decrease the number of usage clusters they see.
+More broadly, many questions remain about just what makes a usage distinct for a developer and how developers might wish to understand these usage clusters.\DIFaddbegin \par
+\DIFaddend 
 
-% There exists more sophisticated clustering approaches, but we preferred to apply a simple clustering approach. Rather than focus on designing the best possible clustering approach, we wanted to first demonstrate initial evidence that clustering can help when applied to the problem of summarizing code usage sites. We thus focused our attention on the interaction design and studying how developers used the usage clusters we created. We believe that our initial results offer evidence for the promise of this approach. We will further clarify where we see opportunities for more sophisticated clustering approaches to be adapted based on our findings.\par
-
- 
-There are a wide range of clustering techniques that might be used to cluster usage sites. For example, hierarchical clustering is a common clustering approach for collecting item into groups based on similarity or distance scores.  Hierarchical clustering commonly involves merging groups, which we did not implement in our approach~\cite{shanmughasundaram2015measurement,day1984efficient,davidson2005agglomerative}. \par
+\DIFaddbegin \DIFadd{There exists more sophisticated clustering approaches, but we preferred to apply a simple clustering approach. Rather than focus on designing the best possible clustering approach, we wanted to first demonstrate initial evidence that clustering can help when applied to the problem of summarizing code usage sites. We thus focused our attention on the interaction design and studying how developers used the usage clusters we created. We believe that our initial results offer evidence for the promise of this approach. We will further clarify where we see opportunities for more sophisticated clustering approaches to be adapted based on our findings.}\par
 
 
-Our results offer additional evidence for the value of call graph navigation tools. Rather than simply looking at usages one level deep, developers often wished to understand usages by going deeper. A wide variety of call graph navigation tools have been designed to support this behavior, beginning with tools such as the call hierarchy and extending to more sophisticated research tools such as StackSplorer~\cite{karrer2011stacksplorer}, Reacher~\cite{latoza2011visualizing}, and Prodet~\cite{augustine2015field}. Our results suggest that these tools may help support developers in understanding method usages. To more directly help developers both understand which usages are distinct and worth understanding as well as understand usages, it might be possible to create new hybrid tools. For example, a tool might combine a view showing clustered usages with the ability to understand the usage in more detail by following paths through the call graph. As distinct usages involve more than one code example, it may also be valuable to find ways to summarize multiple similar paths. 
 
-%While many of the Finding that developers are overwhelmed by too many irrelevant search results and that reducing these is not surprising. While the current usability issues are, in retrospect, obvious, they are still a pervasive and everyday challenge for developers and bringing attention to them is thus important. In addition, our findings offer important insights for designing tools to successfully address these issues, such as identifying what information developers gather when manually inspecting usage sites. 
+\DIFaddend Our results strongly established the importance of call graph navigation tools. Rather than simply \DIFdelbegin \DIFdel{look }\DIFdelend \DIFaddbegin \DIFadd{looking }\DIFaddend at usages one level deep, developers often wished to understand usages by going deeper. A wide variety of call graph navigation tools have been designed to support this behavior, beginning with tools such as the call hierarchy and extending to more sophisticated research tools such as StackSplorer~\cite{karrer2011stacksplorer}, Reacher~\cite{latoza2011visualizing}, and Prodet~\cite{augustine2015field}. Our results suggest that these tools may help support developers in understanding method usages. Hybrid tools might also be envisioned, combining a view showing clustered usages with the ability to follow paths through the call graph. 
+
+\DIFaddbegin \DIFadd{Finding that developers are overwhelmed by too many irrelevant search results and that reducing these is not surprising. While the current usability issues are, in retrospect, obvious, they are still a pervasive and everyday challenge for developers and bringing attention to them is thus important. In addition, our findings offer important insights for designing tools to successfully address these issues, such as identifying what information developers gather when manually inspecting usage sites. 
+}
 
 
-%This should either be picked based on trying out different thresholds on different projects or probably better, allowing it to be configured by a menu option as part of the IDE plugin. Choosing the similarity threshold here for describing similar code, is also familiar to choosing a K when doing K-means, which depends highly on the data-set that K-means is applied to. Picking a reasonable default threshold would be future work, but for now, the best approach would probably be to set it as an option via a menu.
+\DIFaddend %This should either be picked based on trying out different thresholds on different projects or probably better, allowing it to be configured by a menu option as part of the IDE plugin. Choosing the similarity threshold here for describing similar code, is also familiar to choosing a K when doing K-means, which depends highly on the data-set that K-means is applied to. Picking a reasonable default threshold would be future work, but for now, the best approach would probably be to set it as an option via a menu.
 
 %The approach that we used for clustering the usage was a naive approach to clustering that we took due to time constraints preventing us from better understanding the IntelliJ SDK. In the future, we hope to re-implement the usage clustering with merging as part of an agglomerate clustering approach. Also, We can work on scalability and response time of the tool \par
 
@@ -433,9 +569,13 @@ Our results offer additional evidence for the value of call graph navigation too
 %\section{Conclusion}
 %Developers are overwhelmed with duplicate usages results when they are working with Find Usage tool on large codebases to understand the code. We designed and developed a tool that aggregates similar usages. Results of the showed clustering usages based on similarity is useful for developers.
 
-\section*{Acknowledgments}
-We thank Jonathan Bell for his contributions in helping brainstorm the idea of this research, we thank the participants in the study for their participation, and we also thank those enrolled in SWE 795: Software Engineering Environments in Fall 2019.
-This research was supported in part by the National Science Foundation under grants CCF-1414197 and CCF-1845508.
+%DIF <  \section*{Acknowledgment}
+%DIF <  % [TODO]: mention Dr. Jon Bell. He helped us in first ideation part of the paper.
+%DIF <  acknowledgments in the unnumbered footnote on the first page.
+\DIFaddbegin \section*{\DIFadd{Acknowledgment}}
+\DIFadd{We thank Jon Bell for his contributions in brainstorming of the idea of this research, we thank the participants in the study for their participation, and we also thank our colleagues in CS795 of Fall '19.
+This research project was supported in part by the National Science Foundation under grants CCF-1414197 and CCF-1845508.
+}\DIFaddend 
 
 \bibliographystyle{IEEEtran}
 \bibliography{FUU}
